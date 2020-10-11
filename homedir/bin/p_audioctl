@@ -1,0 +1,13 @@
+#!/bin/sh
+# vim: set filetype=sh shiftwidth=2 :
+# This script is for audio control
+
+delta=${2:-1}
+
+case ${1} in
+  toggle) pulsemixer --toggle-mute ;;
+  up) pulsemixer --change-volume +$delta ;;
+  down) pulsemixer --change-volume -$delta ;;
+esac
+
+~/bin/p_statusbar_refresh

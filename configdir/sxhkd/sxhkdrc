@@ -1,0 +1,33 @@
+
+super + Return
+    ${TERMINAL}
+
+super + b
+    chromium
+
+super + d
+    dmenu_run -c -l 30
+
+super + alt + m
+    p_dmenu_unicode
+
+super + alt + t
+    p_toggletray
+
+super + shift + q
+    p_dmenu_exit
+
+XF86AudioLowerVolume
+    p_audioctl down
+
+XF86AudioRaiseVolume
+    p_audioctl up
+
+XF86AudioMute
+    p_audioctl toggle
+
+XF86MonBrightnessDown
+    xbacklight -dec 5
+
+XF86MonBrightnessUp
+    xbacklight -inc 5

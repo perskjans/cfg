@@ -1,0 +1,10 @@
+#!/bin/dash
+# vim: set filetype=sh shiftwidth=2 :
+
+wms=`grep "^Exec=" /usr/share/xsessions/* | cut -d'=' -f2`
+
+
+for wm in $wms
+do
+  echo $wm
+done

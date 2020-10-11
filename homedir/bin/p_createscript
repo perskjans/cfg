@@ -1,0 +1,7 @@
+#!/bin/sh
+# vim: set filetype=sh shiftwidth=2 :
+
+script=$HOME/bin/"$1"
+
+echo -e "#!/bin/sh\n# vim: set filetype=sh shiftwidth=2 :" > $script
+chmod +x $script

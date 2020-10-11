@@ -1,0 +1,4 @@
+#!/bin/sh
+# vim: set filetype=sh shiftwidth=2 :
+
+pkill -P $(pgrep p_statusbar$) sleep

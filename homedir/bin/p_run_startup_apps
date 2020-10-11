@@ -1,0 +1,17 @@
+#!/bin/sh
+# vim: set filetype=sh shiftwidth=2 :
+
+for cmd in \
+  'dunst' \
+  'nm-applet' \
+  'sxhkd' \
+  'unclutter -idle 1' \
+  'volumeicon'
+do
+  set $cmd
+  app=$1
+  if [ ! $(which $app >/dev/null 2>&1) ]; then
+    echo pkill $app >/dev/null 2>&1; echo $cmd
+    pkill $app >/dev/null 2>&1; $cmd &
+  fi
+done

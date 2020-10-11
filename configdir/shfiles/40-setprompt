@@ -1,0 +1,28 @@
+#vim: filetype=sh
+
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm|xterm-color|*-256color) color_prompt=yes;;
+esac
+
+promptcmd()
+{
+    local exitstatus=$?
+    local exitcolor=${TC_FG_GREEN}
+
+    if [ $exitstatus -ne 0 ]; then
+        exitcolor=${TC_FG_RED}
+    fi
+    gitstatus=$(GitStatus)
+
+    userco=$TC_FG_GREEN
+
+    if [ "$UID" == "0" ]; then
+        userco=$TC_FG_RED
+    fi
+
+    DATE=$(date +%H:%M)
+    export PS1="\n#${TC_FG_BLUE}[${exitcolor}${exitstatus}${TC_RESET}${TC_FG_BLUE}][${TC_RESET}$DATE${TC_FG_BLUE}]${TC_RESET}${TC_FG_BLUE}[${userco}\u${TC_RESET}@${userco}\h${TC_RESET}: ${TC_FG_YELLOW}\w${TC_FG_BLUE}]${TC_RESET}\${gitstatus}\n#\$ "
+}
+export PROMPT_COMMAND=promptcmd
+

@@ -1,0 +1,33 @@
+#vim: filetype=sh
+### This file have color variables for herbstluftwm and panel.
+
+## Herbstluft variables ##
+#co_root='#5a8e3a'
+co_root='#001010'
+co_frame_bg_active_color='#450045'
+co_frame_bg_normal_color='#565656'
+co_frame_border_active_color='#00df00'
+co_frame_border_normal_color='#000087'
+
+#co_window_active_color='#d0d0d0'
+co_window_active_color='#008700'
+co_window_normal_color='#454545'
+co_window_urgent_color='#ff0000'
+
+
+
+## Panel variables ##
+co_panel_fg='#afafaf'
+co_panel_bg='#101010'
+#co_panel_occupied_fg='#ffefef'
+co_panel_occupied_fg='#af5faf'
+co_panel_monitor_focust_fg='#000000'
+#co_panel_monitor_focust_bg='#af5f00'
+co_panel_monitor_focust_bg='#008700'
+co_panel_monitor_unfocust_fg='#141414'
+co_panel_monitor_unfocust_bg='#9ca668'
+co_panel_urgent_fg='#000000'
+co_panel_urgent_bg='#af5f00'
+co_panel_empty_fg=$co_panel_fg
+co_panel_other_monitor_focust_fg=$co_panel_fg
+co_panel_other_monitor_unfocust_fg=$co_panel_fg

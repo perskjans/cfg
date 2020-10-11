@@ -1,0 +1,182 @@
+#!/bin/sh
+# vim: set filetype=sh shiftwidth=2 :
+
+reposfile=~/.cache/gitrepos.dat
+
+reporoot()
+{
+  git rev-parse --show-toplevel
+}
+
+repostatus()
+{
+  reposfile_tmp=$reposfile\_tmp
+  cat $reposfile | sort | uniq > $reposfile_tmp
+  dirs=$(cat $reposfile_tmp)
+
+  rm -f $reposfile
+  touch $reposfile
+
+  for dir in $dirs;
+  do
+    if [ -d $dir ]; then
+      echo $dir >> $reposfile
+    fi
+  done
+
+  rm -f $reposfile_tmp
+}
+
+findall()
+{
+  reposfile_tmp=$reposfile\_tmp
+  find $(pwd) -name ".git" -type d | sed "s/\/\.git//g" | sort | uniq >> $reposfile_tmp
+  cat $reposfile_tmp | sort | uniq > $reposfile
+  rm $reposfile_tmp
+}
+
+clone()
+{
+  result=$(git clone $* 2>&1)
+  exit_code=$?
+
+  if [ "$exit_code" != "0" ]; then
+    echo -e ${TC_FG_RED}${result}${CO_RESET}
+    exit $exit_code
+  fi
+
+  echo -e ${TC_FG_GREEN}${result}${CO_RESET}
+  dir=$(echo $result | cut -d"'" -f2)
+  echo $(pwd)/$dir >> $reposfile
+
+  repostatus
+}
+
+pullall()
+{
+  if [[ $# -gt 0 ]]; then
+    FILTER="$1"
+  else
+    FILTER="/"
+  fi
+
+  echo
+  echo FILTER: "$FILTER"
+  echo
+
+  pull()
+  {
+    dir=$1
+    pushd $dir >/dev/null
+    result=$(git remote prune origin 2>&1)
+    result=$(git pull 2>&1)
+
+    if [ ! $result =~ "up to date" ] && [ ! $result =~ "up-to-date" ]; then
+      echo $dir
+      echo -e "${TC_FG_CYAN}${result}${CO_RESET}"
+      echo
+    fi
+
+    popd >/dev/null
+  }
+
+  repostatus
+
+  dirs=$(cat $reposfile)
+
+  for dir in $dirs;
+  do
+    if [ -d $dir ] && [ $(echo $dir | egrep "$FILTER" | wc -l) -ne 0 ]; then
+      pull $dir
+    fi
+  done
+}
+
+get_submodule_path()
+{
+  git submodule | sed 's/\ (.*)$//g; s/^.*\s//g' | grep "/$1$"
+}
+
+submoduleadd()
+{
+  local destdir=$1; shift
+  local url=$1; shift
+  local args="$*"
+  local name=${url##*/}
+  name=${name%.git}
+  local path=$destdir/$name
+
+  echo Running: git submodule add --name $name $args "$url" $path
+  git submodule add --name $name $3 "$url" $path
+}
+
+submoduleupdate()
+{
+  local module=$1; shift
+  local args="$*"
+  local path=$(get_submodule_path $module)
+
+  if [ "$path" = "" ]; then
+    echo "No submodule match for $module!"
+    return 1
+  fi
+
+  echo Running: git submodule update $args $path
+  git submodule update $args $path
+}
+
+submoduleinit()
+{
+  local module=$1; shift
+  local args="$*"
+  local path=$(get_submodule_path $module)
+
+  if [ "$path" = "" ]; then
+    echo "No submodule match for $module!"
+    return 1
+  fi
+
+  echo Running: git submodule init $args $path
+  git submodule init $args $path
+}
+
+submoduledeinit()
+{
+  local module=$1; shift
+  local args="$*"
+  local path=$(get_submodule_path $module)
+  local gitroot=$(reporoot)
+
+  if [ "$path" = "" ]; then
+    echo "No submodule match for $module!"
+    return 1
+  fi
+
+  echo Running: git submodule deinit $args $path
+  git submodule deinit $args $path
+}
+
+submodulerm()
+{
+  echo "$*"
+  local module=$1; shift
+  local args="$*"
+  local path=$(get_submodule_path $module)
+  local gitroot=$(reporoot)
+
+  if [ "$path" = "" ]; then
+    echo "No submodule match for $module!"
+    return 1
+  fi
+
+  echo Running: git submodule deinit $args $path
+  git submodule deinit $args $path
+  if [ $? -eq 0 ]; then
+    echo Running: git rm $path $args
+    git rm $path $args && rm -rf $gitroot/.git/modules/$module
+  fi
+}
+
+
+$*
+exit $?

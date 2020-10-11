@@ -1,0 +1,5 @@
+[Added Associations]
+Type=Application
+Name=Torrent
+Exec=/usr/bin/env p_torrent_add %U
+MimeType=x-scheme-handler/magnet;application/x-bittorrent;

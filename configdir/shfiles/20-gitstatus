@@ -1,0 +1,66 @@
+#vim: filetype=sh
+
+# Show the git commit status.
+CommitStatus()
+{
+    status=$(git status -u | egrep -io "deleted|conflict|copied|modified|new|renamed|unstage|untracked" | tr [:upper:] [:lower:] | sort | uniq | tr "\n" " ")
+    for line in $status
+    do
+        echo -n " "
+        case $line in
+        new)
+            echo -en "${TC_FG_YELLOW}N${TC_RESET}"
+        ;;
+        untracked)
+            echo -en "${TC_FG_CYAN}U${TC_RESET}"
+        ;;
+        modified)
+            echo -en "${TC_FG_BLUE}M${TC_RESET}"
+        ;;
+        deleted)
+            echo -en "${TC_FG_RED}D${TC_RESET}"
+        ;;
+        renamed)
+            echo -en "${TC_FG_MAGENTA}R${TC_RESET}"
+        ;;
+        copied)
+            echo -en ", ${TC_FG_MAGENTA}C${TC_RESET}"
+        ;;
+        unstage)
+            echo -en "${TC_FG_GREEN}S${TC_RESET}"
+        ;;
+        conflict)
+            echo -en "${TC_FG_RED}UU${TC_RESET}"
+        ;;
+        *)
+            echo "UNKNOWN STATUS"
+            return 1
+        ;;
+        esac
+    done
+
+    return 0
+}
+
+
+GitStatus()
+{
+    # If we're inside a .git directory, we can't find the branch / commit status.
+    if pwd | grep -q /.git; then
+        return 0
+    fi
+
+    if git rev-parse --git-dir >/dev/null 2>&1; then
+        gs_branch=$(git branch | grep "^* " | cut -c 3-)
+
+        gs_gitstatus=$(CommitStatus)
+
+        if [ $? -eq 0 ]; then
+            if [ -z "$gs_gitstatus" ]; then
+                echo -en "${TC_FG_BLUE}[${TC_RESET}GIT: '$gs_branch' ${TC_FG_GREEN}Up-to-date${TC_RESET}${TC_FG_BLUE}]${TC_RESET}"
+            else
+                echo -en "${TC_FG_BLUE}[${TC_RESET}GIT: '$gs_branch'$gs_gitstatus${TC_FG_BLUE}]${TC_RESET}"
+            fi
+        fi
+    fi
+}

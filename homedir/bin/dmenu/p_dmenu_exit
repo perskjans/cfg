@@ -1,0 +1,19 @@
+#!/bin/sh
+# vim: set filetype=sh shiftwidth=2 :
+
+logout_cmd="killall Xorg"
+case "$WINDOWMANAGER" in
+  herbstluftwm) logout_cmd="herbstclient quit" ;;
+esac
+
+options=$(echo "0. Nothing\n1. Lock\n2. Logout\n3. Reboot\n4. Shutdown\n5. Suspend" | dmenu -c -l 6 -i -p Do:)
+case "$options" in
+  *Hibernate) systemctl hibernate & ;;
+  *Lock) slock & ;;
+  *Logout) $logout_cmd & ;;
+  *Reboot) systemctl reboot & ;;
+  *Shutdown) systemctl poweroff & ;;
+  *Suspend) systemctl suspend & ;;
+esac
+
+exit 0

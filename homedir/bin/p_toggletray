@@ -1,0 +1,10 @@
+#!/bin/sh
+# vim: set filetype=sh shiftwidth=2 :
+
+pid=$(pgrep trayer)
+if [ "$pid" != ""  ]; then
+  kill $pid
+else
+  trayer --tint 0xFF111111 --transparent true --monitor ${1:-0} \
+    --edge top --align center --height 60 --widthtype request &
+fi
