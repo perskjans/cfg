@@ -48,7 +48,7 @@ endif
         Plug 'guns/xterm-color-table.vim'
 
         Plug 'mcchrish/nnn.vim'
-            " Show dotfiles and open in type-to-nav mode
+            " Show dotfiles
             let g:nnn#command = 'nnn -H'
 
         "Plug 'embear/vim-foldsearch'
@@ -57,11 +57,11 @@ endif
 
         Plug 'vim-scripts/AutoComplPop'
 
-        Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
-            let g:Hexokinase_highlighters = ['backgroundfull']
-            let g:Hexokinase_optInPatterns = 'full_hex,triple_hex,rgb,rgba,hsl,hsla,colour_names'
+        "Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+        "    let g:Hexokinase_highlighters = ['backgroundfull']
+        "    let g:Hexokinase_optInPatterns = 'full_hex,triple_hex,rgb,rgba,hsl,hsla,colour_names'
 
-        "Plug 'lilydjwg/colorizer'
+        Plug 'lilydjwg/colorizer'
 
         "Plug 'yggdroot/indentline'
             let g:indentLine_char = '|'
@@ -77,37 +77,37 @@ endif
             let g:vim_json_syntax_conceal = 0
             let g:vim_json_syntax_concealcursor = 0
 
-        "Plug 'frazrepo/vim-rainbow'
-        "    let g:rainbow_active = 1
+        Plug 'frazrepo/vim-rainbow'
+            let g:rainbow_active = 1
 
-        "Plug 'airblade/vim-gitgutter'
+        Plug 'airblade/vim-gitgutter'
 
-        Plug 'ctrlpvim/ctrlp.vim'
-            let g:ctrlp_map = '<leader>f'
-            let g:ctrlp_cmd = 'CtrlPMixed'
-            let g:ctrlp_clear_cache_on_exit = 0
-            let g:ctrlp_working_path_mode = 'rw'
-            let g:ctrlp_show_hidden = 1
+        "Plug 'ctrlpvim/ctrlp.vim'
+        "    let g:ctrlp_map = '<leader>f'
+        "    let g:ctrlp_cmd = 'CtrlPMixed'
+        "    let g:ctrlp_clear_cache_on_exit = 0
+        "    let g:ctrlp_working_path_mode = 'rw'
+        "    let g:ctrlp_show_hidden = 1
 
         "Plug 'xuyuanp/nerdtree-git-plugin'
 
         "Plug 'scrooloose/syntastic'
 
-        "Plug 'scrooloose/nerdtree'
-        "    nnoremap þ :NERDTreeToggle<cr>
-        "    let g:NERDTreeBookmarksFile = $P_VIMDATADIR . '/tmp/NERDTreeBookmarks'
-        "    let g:NERDTreeDirArrowExpandable = '+'
-        "    let g:NERDTreeDirArrowCollapsible = '-'
-        "    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-            "let NERDTreeHijackNetrw=1
+        Plug 'scrooloose/nerdtree'
+            nnoremap <leader>t :NERDTreeToggle<cr>
+            let g:NERDTreeBookmarksFile = $VIMTMP . '/tmp/NERDTreeBookmarks'
+            let g:NERDTreeDirArrowExpandable = '+'
+            let g:NERDTreeDirArrowCollapsible = '-'
+            let NERDTreeHijackNetrw=1
+            autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
         "Plug 'tpope/vim-vinegar'
             let g:netrw_home=$VIMTMP
-        "    let g:netrw_banner=1 " Disable annoying banner
+            "let g:netrw_banner=1 " Disable annoying banner
             let g:netrw_browser_split=4 " Open in prior window
             let g:netrw_altv=1 " Open splits to the right
             let g:netrw_liststyle=3 " Tree view
-            let g:netrw_list_hide=netrw_gitignore#Hide()
+            "let g:netrw_list_hide=netrw_gitignore#Hide()
             "let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+'
 
         Plug 'tpope/vim-fugitive'
@@ -117,8 +117,6 @@ endif
         "Plug 'tpope/vim-surround'
 
         "Plug 'richsoni/vim-ecliptic'
-
-        "Plug 'itchyny/lightline.vim'
 
         "Plug 'msanders/snipmate.vim'
 
@@ -269,63 +267,104 @@ endif
 
     " Visual setting
         set colorcolumn=81
-        set synmaxcol=400    " Don't try to highlight lines longer than 800 characters.
+
+        set synmaxcol=300                   " Don't try to highlight lines longer than 800 characters.
 
         set wrap                            " Wrap lines longer than window width
         set whichwrap=b,h,l,s,<,>,[,],~     " allow <BS>/h/l/<Left>/<Right>/<Space>, ~ to cross line boundaries
 
         set textwidth=80                    " automatically hard wrap at 80 columns
 
-        if has('linebreak')
-            set linebreak                   " wrap long lines at characters in 'breakat'
-        endif
+        set linebreak                       " wrap long lines at characters in 'breakat'
 
-        set formatoptions=qjcrv
+        set noemoji                         " don't assume all emoji are double width
+
+        set nojoinspaces                    " don't autoinsert two spaces after '.', '?', '!' for join command
+
+        set formatoptions=1     " Don't break a line after a one-letter word.  It's broken before it instead (if possible).
+        set formatoptions+=2    " When formatting text, use the indent of the second line of a paragraph for the rest of the paragraph, instead of the indent of the first line.
+        "set formatoptions+=B   " When joining lines, don't insert a space between two multi-byte characters.  Overruled by the 'M' flag.
+        set formatoptions+=M    " When joining lines, don't insert a space before or after a multi-byte character.  Overrules the 'B' flag.
+        set formatoptions+=a    " Automatic formatting of paragraphs. Every time text is inserted or deleted the paragraph will be reformatted. See (auto-format). When the 'c' flag is present this only happens for recognized comments.
+        set formatoptions+=b    " Like 'v', but only auto-wrap if you enter a blank at or before the wrap margin.
+        set formatoptions+=c    " Auto-wrap comments using textwidth, inserting the current comment leader automatically.
+        set formatoptions+=j    " remove comment leader when joining comment lines
+        set formatoptions+=l    " Long lines are not broken in insert mode: When a line was longer than 'textwidth' when the insert command started, Vim does not automatically format it.
+        "set formatoptions+=m   " Also break at a multi-byte character above 255. This is useful for Asian text where every character is a word on its own.
+        set formatoptions+=n    " smart auto-indenting inside numbered lists
+        "set formatoptions+=o   " Automatically insert the current comment leader after hitting 'o' or 'O' in Normal mode.
+        set formatoptions+=p    " Don't break lines at single spaces that follow periods.
+        set formatoptions+=q    " Allow formatting of comments with 'gq'. Note that formatting will not change blank lines or lines containing only the comment leader. A new paragraph starts after such a line, or when the comment leader changes.
+        set formatoptions+=r    " Automatically insert the current comment leader after hitting <Enter> in Insert mode.
+        set formatoptions+=w    " Trailing white space indicates a paragraph continues in the next line. A line that ends in a non-white character ends a paragraph.
+
+        "set fillchars=diff:∙        " BULLET OPERATOR (U+2219, UTF-8: E2 88 99)
+        "set fillchars+=fold:·       " MIDDLE DOT (U+00B7, UTF-8: C2 B7)
+        "set fillchars+=vert:┃       " BOX DRAWINGS HEAVY VERTICAL (U+2503, UTF-8: E2 94 83)
+        set fillchars+=eob:\        " suppress ~ at EndOfBuffer
 
     " Make naughty characters visible...
-        set list
+        set list                    " show whitespace
+
         "set showbreak=↪
-        "set listchars=tab:▸-▸,extends:❯,precedes:❮,trail:«,nbsp:»
-        ",eol:¬,
+        "set listchars=tab:▸-▸
+        "set listchars+=extends:❯
+        "set listchars+=precedes:❮
+        "set listchars+=trail:«
+        "set listchars+=nbsp:»
+        "set listchars+=eol:¬
 
-        set showbreak=.^.
-        set listchars=tab:>~,extends:>,precedes:<,trail:^,nbsp:~
-        ",eol:
+        set listchars=tab:>~
+        set listchars+=extends:>
+        set listchars+=precedes:<
+        set listchars+=trail:^
+        set listchars+=nbsp:~
+        "set listchars+=eol:
 
+        "let &showbreak='↳ '         " DOWNWARDS ARROW WITH TIP RIGHTWARDS (U+21B3, UTF-8: E2 86 B3)
+        "set listchars=nbsp:⦸        " CIRCLED REVERSE SOLIDUS (U+29B8, UTF-8: E2 A6 B8)
+        "set listchars+=tab:▷┅       " WHITE RIGHT-POINTING TRIANGLE (U+25B7, UTF-8: E2 96 B7) + BOX DRAWINGS HEAVY TRIPLE DASH HORIZONTAL (U+2505, UTF-8: E2 94 85)
+        "set listchars+=extends:»    " RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK (U+00BB, UTF-8: C2 BB)
+        "set listchars+=precedes:«   " LEFT-POINTING DOUBLE ANGLE QUOTATION MARK (U+00AB, UTF-8: C2 AB)
+        "set listchars+=trail:•      " BULLET (U+2022, UTF-8: E2 80 A2)
 
         syntax on
-        set termguicolors
+
+        if has('termguicolors')
+             set termguicolors                   " use guifg/guibg instead of ctermfg/ctermbg in terminal
+        endif
+
         set ruler
-        set lazyredraw
-        set cursorline
-        set number
-        set relativenumber
+        set lazyredraw                        " don't bother updating screen during macro playback
+        set cursorline                        " highlight current line
+        set number                            " show line numbers in gutter
+        set relativenumber                    " show relative numbers in gutter
 
     " Miscellaneous
         filetype plugin indent on
 
         set path+=**
 
-        set scrolloff=5                       " start scrolling 3 lines before edge of viewport
+        set switchbuf=usetab                  " try to reuse windows/tabs when switching buffers
+
+        set scrolloff=5                       " start scrolling N lines before edge of viewport
         set sidescroll=0                      " sidescroll in jumps because terminals are slow
         set sidescrolloff=5                   " same as scrolloff, but for columns
         set shell=$SHELL                      " shell to use for `!`, `:!`, `system()` etc.
+
         set shortmess+=A                      " ignore annoying swapfile messages
         set shortmess+=I                      " no splash screen
         set shortmess+=O                      " file-read message overwrites previous
         set shortmess+=T                      " truncate non-file messages in middle
         set shortmess+=W                      " don't echo "[w]"/"[written]" when writing
         set shortmess+=a                      " use abbreviations in messages eg. `[RO]` instead of `[readonly]`
-        if has('patch-7.4.314')
-            set shortmess+=c                  " completion messages
-        endif
+        set shortmess+=c                      " completion messages
         set shortmess+=o                      " overwrite file-written messages
         set shortmess+=t                      " truncate file messages at start
-        set shortmess+=F                      " ignore errors for missing view files
 
         set showmode
         set showcmd
-        set hidden
+        set hidden                            " allows you to hide buffers with unsaved changes without being prompted
         set visualbell t_vb=                  " stop annoying beeping for non-error errors
         set ttyfast
         set backspace=indent,start,eol        " allow unrestricted backspacing in insert mode
@@ -333,8 +372,8 @@ endif
         set undoreload=10000
 
         set matchtime=3
-        "set splitbelow
-        "set splitright
+        set splitbelow                      " open horizontal splits below current window
+        "set splitright                      " open vertical splits to the right of the current window
         set pastetoggle=<F2>
         "set clipboard=unnamedplus
         set noautochdir
@@ -371,7 +410,7 @@ endif
 
 
         "Square up visual selections...
-        set virtualedit=block
+        set virtualedit=block               " allow cursor to move where there is no text in visual block mode
 
         "=====[ Miscellaneous features (mainly options) ]=====================
 
@@ -384,14 +423,15 @@ endif
         set autoread        "Always reload buffer when external changes detected
 
 
-        set ignorecase
-        set smartcase
-        set infercase                       "Adjust completions to match case
+        set ignorecase          "Case insensitive search
+        set smartcase           "Case sensitive search if word starts with upercase letter
+        set infercase           "Adjust completions to match case
 
-        set showmode                        "Show mode change messages
-        set modelines=2                     "Always show mode
+        set showmode            "Show mode change messages
+        set modelines=5         " scan this many lines looking for modeline
 
-        set updatecount=10                  "Save buffer every 10 chars typed
+        set updatecount=80      "Save buffer every 10 chars typed
+        set updatetime=2000     "If this many milliseconds nothing is typed the swap file will be written to disk, see (crash-recovery). Also used for the (CursorHold) autocommand event.
 
 
         " Keycodes and maps timeout in 3/10 sec...
@@ -418,7 +458,7 @@ endif
         nnoremap zG 2zg
 
     " Wildmenu completion
-        set wildmenu
+        set wildmenu                        " show options as list when switching buffers etc
         set wildmode=list:longest,full      "Show list of completions and complete as much as possible, then iterate full completions
 
         set wildignore+=*/tmp/*,*.so,*.swp,*.zip           " MacOSX/Linux
@@ -442,9 +482,9 @@ endif
         "
 
     " Foldin settings
-        set foldmethod=indent
-        set foldlevelstart=99
-        set foldnestmax=3
+        set foldmethod=indent               " not as cool as syntax, but faster
+        set foldlevelstart=99               " start unfolded
+        set foldnestmax=4
         let g:FoldMethod = 0
 
 
@@ -486,8 +526,11 @@ endif
             " Switch to last used buffer in the window
             nnoremap <leader><leader> <C-^>
 
+            " Show help for <cword> under cursor.
+            nnoremap <leader>sh :execute 'h ' . expand('<cword>') . ' '<cr>
+
             " Show help for <cWORD> under cursor.
-            nnoremap <leader>sh :execute "h " . expand("<cWORD>") . " "<cr>
+            nnoremap <leader>hh :execute 'h ' . expand('<cWORD>') . ' '<cr>
 
             nnoremap <leader>o :e .<cr>
 
@@ -872,148 +915,17 @@ endif
 color perers
 
 
-
-
 "+++++++++++++++++++++++++++++++++++
-    "        set cursorline                        " highlight current line
-    "        set diffopt+=foldcolumn:0             " don't show fold column in diff view
+    " set diffopt+=foldcolumn:0   " don't show fold column in diff view
     "
-    "        set noemoji                           " don't assume all emoji are double width
+    " if exists('&inccommand')
+    "     set inccommand=split    " live preview of :s results
+    " endif
     "
-    "        if has('folding')
-    "            if has('windows')
-    "                set fillchars=diff:∙               " BULLET OPERATOR (U+2219, UTF-8: E2 88 99)
-    "                set fillchars+=fold:·              " MIDDLE DOT (U+00B7, UTF-8: C2 B7)
-    "                set fillchars+=vert:┃              " BOX DRAWINGS HEAVY VERTICAL (U+2503, UTF-8: E2 94 83)
-    "            endif
+    " set noshowcmd               " don't show extra info at end of command line
     "
-    "            if has('nvim-0.3.1')
-    "                set fillchars+=eob:\              " suppress ~ at EndOfBuffer
-    "            endif
+    " set spellcapcheck=          " don't check for capital letters at start of sentence
     "
-    "            set foldmethod=indent               " not as cool as syntax, but faster
-    "            set foldlevelstart=99               " start unfolded
-    "            set foldtext=wincent#settings#foldtext()
-    "        endif
+    " set swapsync=               " let OS sync swapfiles lazily
     "
-    "        if v:version > 703 || v:version == 703 && has('patch541')
-    "            set formatoptions+=j                " remove comment leader when joining comment lines
-    "        endif
-    "
-    "        set formatoptions+=n                  " smart auto-indenting inside numbered lists
-    "        set hidden                            " allows you to hide buffers with unsaved changes without being prompted
-    "
-    "        if !has('nvim')
-    "            " Sync with corresponding nvim :highlight commands in ~/.vim/plugin/autocmds.vim:
-    "            set highlight+=@:Conceal            " ~/@ at end of window, 'showbreak'
-    "            set highlight+=D:Conceal            " override DiffDelete
-    "            set highlight+=N:FoldColumn         " make current line number stand out a little
-    "            set highlight+=c:LineNr             " blend vertical separators with line numbers
-    "        endif
-    "
-    "        if exists('&inccommand')
-    "            set inccommand=split                " live preview of :s results
-    "        endif
-    "
-    "        set lazyredraw                        " don't bother updating screen during macro playback
-    "
-    "
-    "        set list                              " show whitespace
-    "        set listchars=nbsp:⦸                  " CIRCLED REVERSE SOLIDUS (U+29B8, UTF-8: E2 A6 B8)
-    "        set listchars+=tab:▷┅                 " WHITE RIGHT-POINTING TRIANGLE (U+25B7, UTF-8: E2 96 B7)
-    "                                                " + BOX DRAWINGS HEAVY TRIPLE DASH HORIZONTAL (U+2505, UTF-8: E2 94 85)
-    "        set listchars+=extends:»              " RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK (U+00BB, UTF-8: C2 BB)
-    "        set listchars+=precedes:«             " LEFT-POINTING DOUBLE ANGLE QUOTATION MARK (U+00AB, UTF-8: C2 AB)
-    "        set listchars+=trail:•                " BULLET (U+2022, UTF-8: E2 80 A2)
-    "        set modelines=5                       " scan this many lines looking for modeline
-    "        set nojoinspaces                      " don't autoinsert two spaces after '.', '?', '!' for join command
-    "        set number                            " show line numbers in gutter
-    "
-    "        if exists('+relativenumber')
-    "            set relativenumber                  " show relative numbers in gutter
-    "        endif
-    "
-    "        set scrolloff=3                       " start scrolling 3 lines before edge of viewport
-    "        set shell=sh                          " shell to use for `!`, `:!`, `system()` etc.
-    "        set noshiftround                      " don't always indent by multiple of shiftwidth
-    "        set shortmess+=A                      " ignore annoying swapfile messages
-    "        set shortmess+=I                      " no splash screen
-    "        set shortmess+=O                      " file-read message overwrites previous
-    "        set shortmess+=T                      " truncate non-file messages in middle
-    "        set shortmess+=W                      " don't echo "[w]"/"[written]" when writing
-    "        set shortmess+=a                      " use abbreviations in messages eg. `[RO]` instead of `[readonly]`
-    "        if has('patch-7.4.314')
-    "            set shortmess+=c                    " completion messages
-    "        endif
-    "        set shortmess+=o                      " overwrite file-written messages
-    "        set shortmess+=t                      " truncate file messages at start
-    "
-    "        if has('linebreak')
-    "            let &showbreak='↳ '                 " DOWNWARDS ARROW WITH TIP RIGHTWARDS (U+21B3, UTF-8: E2 86 B3)
-    "        endif
-    "
-    "        if has('showcmd')
-    "            set noshowcmd                       " don't show extra info at end of command line
-    "        endif
-    "
-    "        set sidescroll=0                      " sidescroll in jumps because terminals are slow
-    "        set sidescrolloff=3                   " same as scrolloff, but for columns
-    "
-    "        if has('syntax')
-    "            set spellcapcheck=                  " don't check for capital letters at start of sentence
-    "        endif
-    "
-    "        if has('windows')
-    "            set splitbelow                      " open horizontal splits below current window
-    "        endif
-    "
-    "        if has('vertsplit')
-    "            set splitright                      " open vertical splits to the right of the current window
-    "        endif
-    "
-    "        if exists('&swapsync')
-    "            set swapsync=                       " let OS sync swapfiles lazily
-    "        endif
-    "        set switchbuf=usetab                  " try to reuse windows/tabs when switching buffers
-    "
-    "        if has('syntax')
-    "            set synmaxcol=200                   " don't bother syntax highlighting long lines
-    "        endif
-    "
-    "
-    "        if has('termguicolors')
-    "            set termguicolors                   " use guifg/guibg instead of ctermfg/ctermbg in terminal
-    "        endif
-    "
-    "        set textwidth=80                      " automatically hard wrap at 80 columns
-    "
-    "        if has('persistent_undo')
-    "            if exists('$SUDO_USER')
-    "                set noundofile                    " don't create root-owned files
-    "            else
-    "                set undodir=~/.vim/tmp/undo       " keep undo files out of the way
-    "                set undodir+=.
-    "                set undofile                      " actually use undo files
-    "            endif
-    "        endif
-    "
-    "        set updatecount=80                    " update swapfiles every 80 typed chars
-    "        set updatetime=2000                   " CursorHold interval
-    "
-    "        if has('mksession')
-    "            set viewdir=~/.vim/tmp/view         " override ~/.vim/view default
-    "            set viewoptions=cursor,folds        " save/restore just these (with `:{mk,load}view`)
-    "        endif
-    "
-    "        if has('virtualedit')
-    "            set virtualedit=block               " allow cursor to move where there is no text in visual block mode
-    "        endif
-    "        set visualbell t_vb=                  " stop annoying beeping for non-error errors
-    "        set wildcharm=<C-z>                   " substitute for 'wildchar' (<Tab>) in macros
-    "        if has('wildignore')
-    "            set wildignore+=*.o,*.rej           " patterns to ignore during file-navigation
-    "        endif
-    "        if has('wildmenu')
-    "            set wildmenu                        " show options as list when switching buffers etc
-    "        endif
-    "        set wildmode=longest:full,full        " shell-like autocomplete to unambiguous portion
+    " set wildcharm=<C-z>          " substitute for 'wildchar' (<Tab>) in macros
