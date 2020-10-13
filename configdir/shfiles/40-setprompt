@@ -5,6 +5,9 @@ case "$TERM" in
     xterm|xterm-color|*-256color) color_prompt=yes;;
 esac
 
+# Using this so I can override it in my work config
+get_hostname(){ echo hostname; }
+
 promptcmd()
 {
     local exitstatus=$?
@@ -22,7 +25,8 @@ promptcmd()
     fi
 
     DATE=$(date +%H:%M)
-    export PS1="\n#${TC_FG_BLUE}[${exitcolor}${exitstatus}${TC_RESET}${TC_FG_BLUE}][${TC_RESET}$DATE${TC_FG_BLUE}]${TC_RESET}${TC_FG_BLUE}[${userco}\u${TC_RESET}@${userco}\h${TC_RESET}: ${TC_FG_YELLOW}\w${TC_FG_BLUE}]${TC_RESET}\${gitstatus}\n#\$ "
+    HOST=$(get_hostname)
+    export PS1="\n#${TC_FG_BLUE}[${exitcolor}${exitstatus}${TC_RESET}${TC_FG_BLUE}][${TC_RESET}$DATE${TC_FG_BLUE}]${TC_RESET}${TC_FG_BLUE}[${userco}\u${TC_RESET}@${userco}${HOST}${TC_RESET}: ${TC_FG_YELLOW}\w${TC_FG_BLUE}]${TC_RESET}\${gitstatus}\n#\$ "
 }
 export PROMPT_COMMAND=promptcmd
 
