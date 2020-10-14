@@ -12,6 +12,9 @@ esac
 # Set Vi key bindings
 set -o vi
 
+ # Use emacs bindings for clearing screen
+ bind -x '"\C-l": clear;'
+
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
 shopt -s globstar
