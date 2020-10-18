@@ -91,10 +91,10 @@ hi CursorLineNr     cterm=NONE    ctermfg=124     ctermbg=NONE   guifg=#af0000  
 hi Debug            cterm=NONE    ctermfg=225     ctermbg=NONE   guifg=#ff27ff   guibg=NONE
 hi Define           cterm=NONE    ctermfg=21      ctermbg=NONE   guifg=#ff00ff   guibg=NONE
 hi Delimiter        cterm=NONE    ctermfg=241     ctermbg=NONE   guifg=#606060   guibg=NONE
-hi DiffAdd          cterm=NONE    ctermfg=NONE    ctermbg=22     guifg=NONE      guibg=#005f00
-hi DiffChange       cterm=NONE    ctermfg=NONE    ctermbg=94     guifg=NONE      guibg=#875f00
-hi DiffDelete       cterm=NONE    ctermfg=NONE    ctermbg=88     guifg=NONE      guibg=#870000
-hi DiffText         cterm=NONE    ctermfg=NONE    ctermbg=102    guifg=NONE      guibg=#878787
+hi DiffAdd          cterm=NONE    ctermfg=NONE    ctermbg=22     guifg=#000000   guibg=#005f00
+hi DiffChange       cterm=NONE    ctermfg=NONE    ctermbg=94     guifg=#000000   guibg=#875f00
+hi DiffDelete       cterm=NONE    ctermfg=NONE    ctermbg=88     guifg=#000000   guibg=#870000
+hi DiffText         cterm=NONE    ctermfg=NONE    ctermbg=102    guifg=#000000   guibg=#878787
 hi Directory        cterm=NONE    ctermfg=30      ctermbg=NONE   guifg=#008080   guibg=NONE
 hi Error            cterm=NONE    ctermfg=219     ctermbg=89     guifg=#ffafff   guibg=#87005f
 hi Float            cterm=NONE    ctermfg=135     ctermbg=NONE   guifg=#af5fff   guibg=NONE

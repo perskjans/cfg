@@ -45,7 +45,7 @@ endif
         Plug 'vim-airline/vim-airline'
             let g:airline#extensions#tabline#enabled = 1
 
-        Plug 'guns/xterm-color-table.vim'
+        "Plug 'guns/xterm-color-table.vim'
 
         Plug 'mcchrish/nnn.vim'
             " Show dotfiles
