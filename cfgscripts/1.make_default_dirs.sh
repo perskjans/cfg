@@ -3,7 +3,7 @@
 
 for dir in app tmp rep msc $(grep -o '/.*"' $cfgroot/configdir/user-dirs.dirs | tr '"' ' ')
 do
-  [ -d "$homedir/$dir" ] && run_cmd "mkdir -p -m 755 $homedir/${dir#*\/}"
+  [ ! -d "$homedir/$dir" ] && run_cmd "mkdir -p -m 755 $homedir/${dir#*\/}"
 done
 
 # Delete dirs created by desktop environments
