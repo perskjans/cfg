@@ -9,14 +9,17 @@ scriptencoding utf-8
 if exists('$VIMINIT')
     let $MYVIMRC = substitute($VIMINIT, '^source\ ', '', 'g')
     let $VIMDIR = substitute($MYVIMRC, '/init.vim', '', 'g')
-    let $VIMTMP = substitute($VIMDIR, '.config/nvim', '.cache/vim', 'g')
+    let $VIMTMP = substitute($VIMDIR, '.config/nvim', '.cache/nvim', 'g')
+    let $VIMTMP = $VIMTMP . '/' . $USER
 else
     let $VIMDIR = $XDG_CONFIG_HOME . '/nvim'
-    let $VIMTMP = $XDG_CACHE_HOME . '/vim'
+    let $VIMTMP = $XDG_CACHE_HOME . '/nvim'
     let $MYVIMRC = $VIMDIR . '/init.vim'
 endif
 
-silent execute "!mkdir -m 777 -p " . shellescape(expand($VIMTMP)) . "/{swap,undo,backup,view}"
+if !exists('$SUDO_USER')
+    silent execute "!mkdir -m 777 -p " . shellescape(expand($VIMTMP)) . "/{swap,undo,backup,view}"
+endif
 
 if !exists('SCRATCHFILE')
     let $SCRATCHFILE = $VIMTMP . "/scratch.txt"     " Scratchfile for tmp usage
@@ -226,8 +229,8 @@ endif
                 set backupdir=$VIMTMP/backup//
                 set viewdir=$VIMTMP/view//
 
-
-                "                              +--Disable hlsearch while loading viminfo
+                "                              +--Disable hlsearch while loading 
+                "                              viminfo
                 "                              | +--Remember marks for last 500 files
                 "                              | |    +--Remember up to 10000 lines in each register
                 "                              | |    |      +--Remember up to 1MB in each register
@@ -271,7 +274,7 @@ endif
         set synmaxcol=300                   " Don't try to highlight lines longer than 800 characters.
 
         set wrap                            " Wrap lines longer than window width
-        set whichwrap=b,h,l,s,<,>,[,],~     " allow <BS>/h/l/<Left>/<Right>/<Space>, ~ to cross line boundaries
+        set whichwrap=b,s,<,>,[,],~         " allow <BS>/<Space>/<Left>/<Right>, ~ to cross line boundaries
 
         set textwidth=80                    " automatically hard wrap at 80 columns
 
@@ -301,7 +304,7 @@ endif
         "set fillchars=diff:∙        " BULLET OPERATOR (U+2219, UTF-8: E2 88 99)
         "set fillchars+=fold:·       " MIDDLE DOT (U+00B7, UTF-8: C2 B7)
         "set fillchars+=vert:┃       " BOX DRAWINGS HEAVY VERTICAL (U+2503, UTF-8: E2 94 83)
-        set fillchars+=eob:\        " suppress ~ at EndOfBuffer
+        "set fillchars+=eob:\        " suppress ~ at EndOfBuffer
 
     " Make naughty characters visible...
         set list                    " show whitespace
@@ -312,14 +315,14 @@ endif
         "set listchars+=precedes:❮
         "set listchars+=trail:«
         "set listchars+=nbsp:»
-        "set listchars+=eol:¬
 
-        set listchars=tab:>~
-        set listchars+=extends:>
-        set listchars+=precedes:<
-        set listchars+=trail:^
-        set listchars+=nbsp:~
-        "set listchars+=eol:
+        let &showbreak=' ¬ '
+        set listchars=tab:¦»
+        set listchars+=extends:»
+        set listchars+=precedes:«
+        set listchars+=trail:°
+        set listchars+=nbsp:÷
+        "set listchars+=eol:¶
 
         "let &showbreak='↳ '         " DOWNWARDS ARROW WITH TIP RIGHTWARDS (U+21B3, UTF-8: E2 86 B3)
         "set listchars=nbsp:⦸        " CIRCLED REVERSE SOLIDUS (U+29B8, UTF-8: E2 A6 B8)
@@ -362,7 +365,6 @@ endif
         set shortmess+=o                      " overwrite file-written messages
         set shortmess+=t                      " truncate file messages at start
 
-        set showmode
         set showcmd
         set hidden                            " allows you to hide buffers with unsaved changes without being prompted
         set visualbell t_vb=                  " stop annoying beeping for non-error errors
@@ -373,7 +375,7 @@ endif
 
         set matchtime=3
         set splitbelow                      " open horizontal splits below current window
-        "set splitright                      " open vertical splits to the right of the current window
+        set splitright                      " open vertical splits to the right of the current window
         set pastetoggle=<F2>
         "set clipboard=unnamedplus
         set noautochdir
@@ -576,6 +578,8 @@ endif
             nnoremap <silent> <localleader>o :call perers#functions#close_explorer_buffers()<cr>
 
     " Insert mode
+        inoremap tn <ESC>
+
         " cursor one word left/right
             inoremap á <S-LEFT>
             inoremap í <S-RIGHT>
@@ -586,7 +590,8 @@ endif
 
         " Uppercase word mapping.
             "
-            " This mapping allows you to press <c-u> in insert mode to convert the current
+            " This mapping allows you to press <c-u> in insert mode to convert 
+            " the current
             " word to uppercase.  It's handy when you're writing names of constants and
             " don't want to use Capslock.
             "
@@ -608,8 +613,7 @@ endif
             "
             " Note that this will overwrite the contents of the z mark.  I never use it, but
             " if you do you'll probably want to use another mark.
-            "inoremap <C-u> <esc>mzgUiw`za
-            inoremap <A-v> <esc>mzgUiw`za
+            inoremap <C-U> <esc>mzgUiw`za
 
         " Default mappings from documentation
         " -----------------------------------------------------------------------
