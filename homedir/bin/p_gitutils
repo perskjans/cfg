@@ -3,6 +3,79 @@
 
 reposfile=~/.cache/gitrepos.dat
 
+getbranch()
+{
+    git branch --no-color | grep "^* " | cut -c 3-
+}
+
+# Show the git commit status.
+commit_status()
+{
+    local status=$(git status -u | egrep -io "deleted|conflict|copied|modified|new|renamed|unstage|untracked" | tr [:upper:] [:lower:] | sort | uniq | tr "\n" " ")
+    for line in $status
+    do
+        case $line in
+        new)
+            P_GIT_STATUS="$P_GIT_STATUS ${TC_FG_YELLOW}N${TC_RESET}" ;;
+        untracked)
+            P_GIT_STATUS="$P_GIT_STATUS ${TC_FG_CYAN}U${TC_RESET}" ;;
+        modified)
+            P_GIT_STATUS="$P_GIT_STATUS ${TC_FG_BLUE}M${TC_RESET}" ;;
+        deleted)
+            P_GIT_STATUS="$P_GIT_STATUS ${TC_FG_RED}D${TC_RESET}" ;;
+        renamed)
+            P_GIT_STATUS="$P_GIT_STATUS ${TC_FG_MAGENTA}R${TC_RESET}" ;;
+        copied)
+            P_GIT_STATUS="${TC_FG_MAGENTA}C${TC_RESET} $P_GIT_STATUS ," ;;
+        unstage)
+            P_GIT_STATUS="$P_GIT_STATUS ${TC_FG_GREEN}S${TC_RESET}" ;;
+        conflict)
+            P_GIT_STATUS="$P_GIT_STATUS ${TC_FG_RED}UU${TC_RESET}" ;;
+        *)
+            P_GIT_STATUS="UNKNOWN STATUS"
+            return 1
+        ;;
+        esac
+    done
+
+    return 0
+}
+
+
+current_status()
+{
+  unset P_GIT_STATUS
+    # If we're inside a .git directory, we can't find the branch / commit status.
+    if pwd | grep -q /.git; then
+        return 0
+    fi
+
+    if git rev-parse --git-dir >/dev/null 2>&1; then
+        gs_branch=$(getbranch)
+        #gs_gitstatus=$(commit_status)
+        commit_status
+
+        if [ $? -eq 0 ]; then
+            #if [ -z "$gs_gitstatus" ]; then
+            if [ -z "$P_GIT_STATUS" ]; then
+              echo "${TC_FG_BLUE}[${TC_RESET}GIT: '$gs_branch' ${TC_FG_GREEN}Up-to-date${TC_RESET}${TC_FG_BLUE}]${TC_RESET}"
+            else
+              echo "${TC_FG_BLUE}[${TC_RESET}GIT: '$gs_branch'$P_GIT_STATUS${TC_FG_BLUE}]${TC_RESET}"
+            fi
+        fi
+    fi
+}
+
+setupstream()
+{
+  git push --set-upstream origin $(getbranch)
+}
+
+deleteupstream()
+{
+  git push --delete origin $(getbranch)
+}
+
 reporoot()
 {
   git rev-parse --show-toplevel
