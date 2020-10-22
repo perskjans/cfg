@@ -111,7 +111,7 @@ hi Macro            cterm=NONE    ctermfg=21      ctermbg=NONE   guifg=#ff00ff  
 hi MatchParen       cterm=NONE    ctermfg=16      ctermbg=91     guifg=#000000   guibg=#8700af
 hi ModeMsg          cterm=NONE    ctermfg=229     ctermbg=NONE   guifg=#ffffaf   guibg=NONE
 hi MoreMsg          cterm=NONE    ctermfg=229     ctermbg=NONE   guifg=#ffffaf   guibg=NONE
-hi NonText          cterm=NONE    ctermfg=59      ctermbg=NONE   guifg=#5f5f5f   guibg=NONE
+hi NonText          cterm=NONE    ctermfg=59      ctermbg=NONE   guifg=#005f87   guibg=NONE
 hi Normal           cterm=NONE    ctermfg=130     ctermbg=16     guifg=#af5f00   guibg=#000000
 hi Number           cterm=NONE    ctermfg=135     ctermbg=NONE   guifg=#af5fff   guibg=NONE
 hi Operator         cterm=NONE    ctermfg=161     ctermbg=NONE   guifg=#d7005f   guibg=NONE
