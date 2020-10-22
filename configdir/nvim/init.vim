@@ -92,12 +92,12 @@ endif
         "    let g:ctrlp_working_path_mode = 'rw'
         "    let g:ctrlp_show_hidden = 1
 
-        "Plug 'xuyuanp/nerdtree-git-plugin'
+        Plug 'xuyuanp/nerdtree-git-plugin'
 
         "Plug 'scrooloose/syntastic'
 
         Plug 'scrooloose/nerdtree'
-            nnoremap <leader>t :NERDTreeToggle<cr>
+            nnoremap þ :NERDTreeToggle<cr>
             let g:NERDTreeBookmarksFile = $VIMTMP . '/tmp/NERDTreeBookmarks'
             let g:NERDTreeDirArrowExpandable = '+'
             let g:NERDTreeDirArrowCollapsible = '-'
