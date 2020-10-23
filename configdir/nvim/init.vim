@@ -578,6 +578,7 @@ endif
             nnoremap <silent> <localleader>o :call perers#functions#close_explorer_buffers()<cr>
 
     " Insert mode
+        " Quick way to exit insert mode
         inoremap tn <ESC>
 
         " cursor one word left/right
@@ -758,8 +759,8 @@ endif
 
 
         " Move between open buffers
-            nnoremap <C-h> :bp<CR>
-            nnoremap <C-l> :bn<CR>
+            nnoremap th :bp<CR>
+            nnoremap tt :bn<CR>
 
         " Movement
             nnoremap ä <C-u> " Half page up
