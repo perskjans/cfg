@@ -124,7 +124,8 @@ bind -x '"\C-l": clear;'
 
   ## Misc {{{
     [ $(command -v st) ] && export TERMINAL=st || export TERMINAL=xterm
-    [ $(command -v nvim) ] && export EDITOR=nvim || export EDITOR=vim && export VIMINIT="source $XDG_CONFIG_HOME/nvim/init.vim"
+    [ $(command -v nvim) ] && export EDITOR=nvim || export EDITOR=vim
+    [ "$EDITOR" = "vim" ] && export VIMINIT="source $XDG_CONFIG_HOME/nvim/init.vim"
 
     export BROWSER=chromium
 
@@ -204,7 +205,7 @@ bind -x '"\C-l": clear;'
     if [ $# -eq 0 ]; then
       /usr/bin/man
     elif whatis $* ; then
-      /usr/bin/man $* | col -b | vim -c 'set ft=man nomod nolist' -
+      /usr/bin/man $* | col -b | $EDITOR -c 'set ft=man nomod nolist' -
     fi
   }
   alias man='vimman'
