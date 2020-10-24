@@ -1,4 +1,4 @@
-# vim: set filetype=sh shiftwidth=2 foldmethod=marker :
+# vim: set filetype=sh shiftwidth=2 :
 
 # If not running interactively, don't do anything
 case $- in
@@ -13,7 +13,7 @@ set -o vi
 bind -x '"\C-l": clear;'
 
 
-## SHOPT OPTIONS {{{
+## SHOPT OPTIONS
   # If set, the pattern "**" used in a pathname expansion context will match all
   # files and zero or more directories and subdirectories.
   shopt -s globstar
@@ -26,9 +26,8 @@ bind -x '"\C-l": clear;'
   # check the window size after each command and, if necessary,
   # update the values of LINES and COLUMNS.
   shopt -s checkwinsize
-## }}}
 
-## BASH COMPLETION {{{
+## BASH COMPLETION
   # enable programmable completion features (you don't need to enable
   # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
   # sources /etc/bash.bashrc).
@@ -39,9 +38,8 @@ bind -x '"\C-l": clear;'
       . /etc/bash_completion
     fi
   fi
-## }}}
 
-## HISTORY CONFIG {{{
+## HISTORY CONFIG
   export HISTFILE="$HOME/.cache/bash/history"
 
   # don't put duplicate lines or lines starting with space in the history.
@@ -50,18 +48,16 @@ bind -x '"\C-l": clear;'
   # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
   HISTSIZE=1000
   HISTFILESIZE=20000
-## }}}
 
-## EXPORTS {{{
-  ## path {{{
+## EXPORTS
+  ## path
     path=$HOME/.work/bin
     for d in $(find -L $HOME/bin -type d); do path=$path:$d; done
 
     PATH=$path:$PATH
     export PATH
-  ## }}}
 
-  ## Locale {{{
+  ## Locale
     lang="en_DK.UTF-8"
     [[ $(locale -a | grep -c 'en_DK') -eq 0 ]] && lang="sv_SE.UTF-8"
 
@@ -79,9 +75,8 @@ bind -x '"\C-l": clear;'
     export LC_TELEPHONE="$lang"
     export LC_MEASUREMENT="$lang"
     export LC_IDENTIFICATION="en_US.UTF-8"
-  ## }}}
 
-  ## Terminal colors {{{
+  ## Terminal colors
     export TC_RESET="\033[0m"
 
     export TC_BRIGHT="\033[1m"
@@ -105,9 +100,8 @@ bind -x '"\C-l": clear;'
     export TC_BG_MAGENTA="\033[45m"
     export TC_BG_CYAN="\033[46m"
     export TC_BG_WHITE="\033[47m"
-  ## }}}
 
-  ## XDG {{{
+  ## XDG
     export XDG_CONFIG_HOME="$HOME/.config"
     export XDG_CACHE_HOME="$HOME/.cache"
     export XDG_DATA_HOME="$HOME/.local/share"
@@ -120,9 +114,8 @@ bind -x '"\C-l": clear;'
     export XDG_PICTURES_DIR="$HOME/pic"
     export XDG_VIDEOS_DIR="$HOME/vid"
     mkdir -p $XDG_DATA_HOME/fonts
-  ## }}}
 
-  ## Misc {{{
+  ## Misc
     [ $(command -v st) ] && export TERMINAL=st || export TERMINAL=xterm
     [ $(command -v nvim) ] && export EDITOR=nvim || export EDITOR=vim
     [ "$EDITOR" = "vim" ] && export VIMINIT="source $XDG_CONFIG_HOME/nvim/init.vim"
@@ -175,10 +168,8 @@ bind -x '"\C-l": clear;'
     export XSERVERRC="$XDG_CONFIG_HME/X11/xserverrc"
 
     export SQLITE_HISTORY=$XDG_DATA_HOME/sqlite_history
-  ## }}}
-## EXPORTS }}}
 
-## ALIASES {{{
+## ALIASES
 
   alias e=$EDITOR
   alias vi=$EDITOR
@@ -225,7 +216,7 @@ bind -x '"\C-l": clear;'
   alias tmux='tmux -u -f $HOME/.config/tmux/tmux.conf'
   alias tx='$HOME/bin/p_runtmux'
 
-  ## Git related aliases {{{
+  ## Git related aliases
     alias g='git'
     alias ga='g add'
     alias gA='ga $(gs -s | sed "s|^.*\ ||g")'
@@ -264,10 +255,8 @@ bind -x '"\C-l": clear;'
 
     alias gsetupstream='p_gitutils setupstream'
     alias gdeleteupstream='p_gitutils deleteupstream'
-  ## }}}
-## }}}
 
-## PLATTFORM SPECIFIC {{{
+## PLATTFORM SPECIFIC
     DISTRO_TYPE=unknown
 
     [ -f /etc/arch-release ] && DISTRO_TYPE=arch
@@ -340,9 +329,8 @@ bind -x '"\C-l": clear;'
             alias prd='sudo xbps-remove -Oo '
         ;;
     esac
-## }}}
 
-## PROMPT {{{
+## PROMPT
     # set a fancy prompt (non-color, unless we know we "want" color)
     case "$TERM" in
     xterm|xterm-color|*-256color) color_prompt=yes;;
@@ -373,7 +361,6 @@ bind -x '"\C-l": clear;'
         export PS1="${LNS}${TC_FG_BLUE}[${exitcolor}${exitstatus}${TC_RESET}${TC_FG_BLUE}][${TC_RESET}$DATE${TC_FG_BLUE}]${TC_RESET}${TC_FG_BLUE}[${userco}\u${TC_RESET}@${userco}${HOST}${TC_RESET}: ${TC_FG_YELLOW}\w${TC_FG_BLUE}]${TC_RESET}${gitstatus}${LNS}\$ "
     }
     export PROMPT_COMMAND=promptcmd
-## }}}
 
 # source work specific files
 [ -d $HOME/.work/config ] && for f in $HOME/.work/config/*; do . $f; done
