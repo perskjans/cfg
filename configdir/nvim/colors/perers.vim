@@ -71,7 +71,7 @@
 "  244 #808080  245 #8a8a8a  246 #949494  247 #9e9e9e  248 #a8a8a8  249 #b2b2b2
 "  250 #bcbcbc  251 #c6c6c6  252 #d0d0d0  253 #dadada  254 #e4e4e4  255 #eeeeee
 
-hi clear
+"hi clear
 set t_Co=256
 set background=dark
 if exists("syntax_on")
