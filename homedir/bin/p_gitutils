@@ -167,7 +167,14 @@ pullall()
 
 get_submodule_path()
 {
-  git submodule | sed 's/\ (.*)$//g; s/^.*\s//g' | grep "/$1$"
+  cat $(reporoot)/.gitmodules | grep "\"$1\"" -A 1 | grep path | cut -d' ' -f3
+}
+
+submodule_action_after()
+{
+  local path=$1
+  cd $path
+  [ -f [mM]akefile ] && make
 }
 
 submoduleadd()
@@ -181,6 +188,7 @@ submoduleadd()
 
   echo Running: git submodule add --name $name $args "$url" $path
   git submodule add --name $name $3 "$url" $path
+  [ $? ] && submodule_action_after "$path"
 }
 
 submoduleupdate()
@@ -202,6 +210,8 @@ submoduleinit()
 {
   local module=$1; shift
   local args="$*"
+  local gitroot=$(reporoot)
+  cd $gitroot
   local path=$(get_submodule_path $module)
 
   if [ "$path" = "" ]; then
@@ -217,8 +227,9 @@ submoduledeinit()
 {
   local module=$1; shift
   local args="$*"
-  local path=$(get_submodule_path $module)
   local gitroot=$(reporoot)
+  cd $gitroot
+  local path=$(get_submodule_path $module)
 
   if [ "$path" = "" ]; then
     echo "No submodule match for $module!"
@@ -234,8 +245,9 @@ submodulerm()
   echo "$*"
   local module=$1; shift
   local args="$*"
-  local path=$(get_submodule_path $module)
   local gitroot=$(reporoot)
+  cd $gitroot
+  local path=$(get_submodule_path $module)
 
   if [ "$path" = "" ]; then
     echo "No submodule match for $module!"
@@ -246,7 +258,7 @@ submodulerm()
   git submodule deinit $args $path
   if [ $? -eq 0 ]; then
     echo Running: git rm $path $args
-    git rm $path $args && rm -rf $gitroot/.git/modules/$module
+    git rm $gitroot/$path $args && rm -rf $gitroot/.git/modules/$module
   fi
 }
 

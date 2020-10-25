@@ -58,14 +58,15 @@ bind -x '"\C-l": clear;'
     export PATH
 
   ## Locale
-    lang="en_DK.UTF-8"
-    [[ $(locale -a | grep -c 'en_DK') -eq 0 ]] && lang="sv_SE.UTF-8"
+    lang="sv_SE.UTF-8"
+    langtime="en_DK.UTF-8"
+    [[ $(locale -a | grep -c 'en_DK') -eq 0 ]] && langtime="sv_SE.UTF-8"
 
     unset LC_ALL
     export LANG="en_US.UTF-8"
     export LC_CTYPE="en_US.UTF-8"
     export LC_NUMERIC="$lang"
-    export LC_TIME="$lang"
+    export LC_TIME="$langtime"
     export LC_COLLATE=C
     export LC_MONETARY="$lang"
     export LC_MESSAGES="en_US.UTF-8"
@@ -247,7 +248,10 @@ bind -x '"\C-l": clear;'
     alias gsa='p_gitutils submoduleadd'
     alias gsi='p_gitutils submoduleinit'
     alias gsd='p_gitutils submoduledeinit'
+    alias gsl="(gcd; cat .gitmodules | grep submodule | cut -d'\"' -f2)"
+    alias gslp="(gcd; git submodule status | cut -d' ' -f3)"
     alias gsr='p_gitutils submodulerm'
+    alias gss='git submodule status'
     alias gsu='p_gitutils submoduleupdate'
 
     alias gdirset='export GIT_DIR=$HOME/.cfg.git/; export GIT_WORK_TREE=$HOME'
