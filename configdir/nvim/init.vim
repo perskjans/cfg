@@ -16,6 +16,11 @@ if exists('$VIMINIT')
     let $VIMDIR = substitute($MYVIMRC, '/init.vim', '', 'g')
     let $VIMTMP = substitute($VIMDIR, '.config/nvim', '.cache/nvim', 'g')
     let $VIMTMP = $VIMTMP . '/' . $USER
+
+    set runtimepath^=$VIMDIR
+    set runtimepath+=$VIMDIR/after
+    set packpath^=$VIMDIR
+    set packpath+=$VIMDIR/after
 else
     let $VIMDIR = $XDG_CONFIG_HOME . '/nvim'
     let $VIMTMP = $XDG_CACHE_HOME . '/nvim'
@@ -35,9 +40,6 @@ if !exists('SCRATCHFILE')
 endif
 
 let g:plugindir = $VIMDIR . "/pack/plugins/opt/"
-
-set runtimepath^=$VIMDIR
-set runtimepath+=$VIMDIR/after
 
 
 " SETTINGS ===
@@ -1294,4 +1296,4 @@ set runtimepath+=$VIMDIR/after
         augroup END
 
 " SET COLORSCHEME
-color perers
+    color perers
