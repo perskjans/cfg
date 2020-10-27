@@ -359,10 +359,17 @@ bind -x '"\C-l": clear;'
             userco=$TC_FG_RED
         fi
 
-        DATE=$(date +%H:%M)
-        HOST=$(get_hostname)
-        LNS="${TC_FG_BLUE}\n#${TC_RESET}"
-        export PS1="${LNS}${TC_FG_BLUE}[${exitcolor}${exitstatus}${TC_RESET}${TC_FG_BLUE}][${TC_RESET}$DATE${TC_FG_BLUE}]${TC_RESET}${TC_FG_BLUE}[${userco}\u${TC_RESET}@${userco}${HOST}${TC_RESET}: ${TC_FG_YELLOW}\w${TC_FG_BLUE}]${TC_RESET}${gitstatus}${LNS}\$ "
+        local LNS="${TC_FG_BLUE}\n#${TC_RESET}"
+        local LBRACK="${TC_FG_BLUE}[${TC_RESET}"
+        local RBRACK="${TC_FG_BLUE}]${TC_RESET}"
+        local EXIT=${exitcolor}${exitstatus}${TC_RESET}
+        local DATE=$(date +%H:%M)
+        local USR=${userco}${USER}${TC_RESET}
+        local HOST=${userco}$(get_hostname)${TC_RESET}
+        local CURREND_DIR=${TC_FG_YELLOW}$(pwd)${TC_RESET}
+
+        export PS1=''
+        export PS1="${LNS}${LBRACK}${EXIT}${RBRACK}${LBRACK}${DATE}${RBRACK}${LBRACK}${USR}@${HOST}: ${CURREND_DIR}${RBRACK}${gitstatus}${LNS}\$ "
     }
     export PROMPT_COMMAND=promptcmd
 
