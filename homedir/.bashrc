@@ -341,7 +341,7 @@ bind -x '"\C-l": clear;'
     esac
 
     # Using this so I can override it in my work config
-    get_hostname(){ echo hostname; }
+    get_hostname(){ hostname; }
 
     promptcmd()
     {
@@ -351,7 +351,6 @@ bind -x '"\C-l": clear;'
         if [ $exitstatus -ne 0 ]; then
             exitcolor=${TC_FG_RED}
         fi
-        gitstatus=$(p_gitutils current_status)
 
         userco=$TC_FG_GREEN
 
@@ -366,10 +365,11 @@ bind -x '"\C-l": clear;'
         local DATE=$(date +%H:%M)
         local USR=${userco}${USER}${TC_RESET}
         local HOST=${userco}$(get_hostname)${TC_RESET}
-        local CURREND_DIR=${TC_FG_YELLOW}$(pwd)${TC_RESET}
+        local CWD=${TC_FG_YELLOW}$(pwd)${TC_RESET}
+        local GITSTATUS=$(p_gitutils current_status)
 
         export PS1=''
-        export PS1="${LNS}${LBRACK}${EXIT}${RBRACK}${LBRACK}${DATE}${RBRACK}${LBRACK}${USR}@${HOST}: ${CURREND_DIR}${RBRACK}${gitstatus}${LNS}\$ "
+        export PS1="${LNS}${LBRACK}${EXIT}${RBRACK}${LBRACK}${DATE}${RBRACK}${LBRACK}${USR}@${HOST}: ${CWD}${RBRACK}${GITSTATUS}${LNS}\$ "
     }
     export PROMPT_COMMAND=promptcmd
 
