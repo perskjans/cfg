@@ -185,17 +185,22 @@ submoduleadd()
   local name=${url##*/}
   name=${name%.git}
   local path=$destdir/$name
+  local gitroot=$(reporoot)
+  cd $gitroot
 
   echo Running: git submodule add --name $name $args "$url" $path
   git submodule add --name $name $3 "$url" $path
   [ $? ] && submodule_action_after "$path"
+  cd - >/dev/null 2>&1
 }
 
 submoduleupdate()
 {
   local module=$1; shift
   local args="$*"
+  local gitroot=$(reporoot)
   local path=$(get_submodule_path $module)
+  cd $gitroot
 
   if [ "$path" = "" ]; then
     echo "No submodule match for $module!"
@@ -204,6 +209,7 @@ submoduleupdate()
 
   echo Running: git submodule update $args $path
   git submodule update $args $path
+  cd - >/dev/null 2>&1
 }
 
 submoduleinit()
@@ -211,8 +217,8 @@ submoduleinit()
   local module=$1; shift
   local args="$*"
   local gitroot=$(reporoot)
-  cd $gitroot
   local path=$(get_submodule_path $module)
+  cd $gitroot
 
   if [ "$path" = "" ]; then
     echo "No submodule match for $module!"
@@ -221,6 +227,7 @@ submoduleinit()
 
   echo Running: git submodule init $args $path
   git submodule init $args $path
+  cd - >/dev/null 2>&1
 }
 
 submoduledeinit()
@@ -228,8 +235,8 @@ submoduledeinit()
   local module=$1; shift
   local args="$*"
   local gitroot=$(reporoot)
-  cd $gitroot
   local path=$(get_submodule_path $module)
+  cd $gitroot
 
   if [ "$path" = "" ]; then
     echo "No submodule match for $module!"
@@ -238,6 +245,7 @@ submoduledeinit()
 
   echo Running: git submodule deinit $args $path
   git submodule deinit $args $path
+  cd - >/dev/null 2>&1
 }
 
 submodulerm()
@@ -246,8 +254,8 @@ submodulerm()
   local module=$1; shift
   local args="$*"
   local gitroot=$(reporoot)
-  cd $gitroot
   local path=$(get_submodule_path $module)
+  cd $gitroot
 
   if [ "$path" = "" ]; then
     echo "No submodule match for $module!"
@@ -260,6 +268,7 @@ submodulerm()
     echo Running: git rm $path $args
     git rm $gitroot/$path $args && rm -rf $gitroot/.git/modules/$module
   fi
+  cd - >/dev/null 2>&1
 }
 
 
