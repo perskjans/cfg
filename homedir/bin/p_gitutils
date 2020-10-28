@@ -114,11 +114,11 @@ clone()
   exit_code=$?
 
   if [ "$exit_code" != "0" ]; then
-    echo -e ${TC_FG_RED}${result}${CO_RESET}
+    echo ${TC_FG_RED}${result}${CO_RESET}
     exit $exit_code
   fi
 
-  echo -e ${TC_FG_GREEN}${result}${CO_RESET}
+  echo ${TC_FG_GREEN}${result}${CO_RESET}
   dir=$(echo $result | cut -d"'" -f2)
   echo $(pwd)/$dir >> $reposfile
 

@@ -1,24 +1,3 @@
-[submodule "dmenu"]
-	path = homedir/app/suckless/dmenu
-	url = ../dmenu
-[submodule "dwm"]
-	path = homedir/app/suckless/dwm
-	url = ../dwm
-[submodule "lemonbar-xft"]
-	path = homedir/app/lemonbar-xft
-	url = ../lemonbar-xft
-[submodule "nnn"]
-	path = homedir/app/nnn
-	url = https://github.com/jarun/nnn
-[submodule "fzf"]
-	path = homedir/app/fzf
-	url = https://github.com/junegunn/fzf
-[submodule "slock"]
-	path = homedir/app/suckless/slock
-	url = ../slock
-[submodule "st"]
-	path = homedir/app/suckless/st
-	url = ../st
 [submodule "AutoComplPop"]
 	path = configdir/nvim/pack/plugins/opt/AutoComplPop
 	url = https://github.com/vim-scripts/AutoComplPop
