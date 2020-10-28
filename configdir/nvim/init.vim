@@ -39,7 +39,7 @@ if !exists('SCRATCHFILE')
     let $SCRATCHFILE = $VIMTMP . "/scratch.txt"     " Scratchfile for tmp usage
 endif
 
-let g:plugindir = $VIMDIR . "/pack/plugins/opt/"
+let g:plugindir = $VIMDIR . "/pack/plugins/start/"
 
 
 " SETTINGS ===
@@ -810,10 +810,9 @@ let g:plugindir = $VIMDIR . "/pack/plugins/opt/"
 
 " PLUGINS ===
     " Load plugins
+    packloadall!
+
     let g:plugins = split(substitute(glob(g:plugindir . '*'), g:plugindir, '', 'g'))
-    for plugin in g:plugins
-        execute 'packadd! ' . plugin
-    endfor
 
     " Plugin config
     for plugin in g:plugins
