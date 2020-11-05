@@ -114,15 +114,33 @@ clone()
   exit_code=$?
 
   if [ "$exit_code" != "0" ]; then
-    echo -e "${TC_FG_RED}${result}${CO_RESET}"
+    echo -e "${TC_FG_RED}${result}${TC_RESET}"
     exit $exit_code
   fi
 
-  echo -e "${TC_FG_GREEN}${result}${CO_RESET}"
+  echo -e "${TC_FG_GREEN}${result}${TC_RESET}"
   dir=$(echo $result | cut -d"'" -f2)
   echo $(pwd)/$dir >> $reposfile
 
   repostatus
+}
+
+pull()
+{
+  dir=$1
+  pushd $dir >/dev/null
+  result=$(git pull 2>&1)
+
+  if [ "$result" != "Already up to date." ]; then
+    echo
+    echo $dir
+    echo -e "${TC_FG_CYAN}${result}"
+    echo
+    git gc --auto
+    echo -e "${TC_RESET}"
+  fi
+
+  popd >/dev/null
 }
 
 pullall()
@@ -137,31 +155,13 @@ pullall()
   echo FILTER: "$FILTER"
   echo
 
-  pull()
-  {
-    dir=$1
-    pushd $dir >/dev/null
-    result=$(git remote prune origin 2>&1)
-    result=$(git pull 2>&1)
-
-    if [ ! $result =~ "up to date" ] && [ ! $result =~ "up-to-date" ]; then
-      echo $dir
-      echo -e "${TC_FG_CYAN}${result}${CO_RESET}"
-      echo
-    fi
-
-    popd >/dev/null
-  }
-
   repostatus
 
-  dirs=$(cat $reposfile)
+  dirs=$(cat $reposfile | egrep "$FILTER")
 
   for dir in $dirs;
   do
-    if [ -d $dir ] && [ $(echo $dir | egrep "$FILTER" | wc -l) -ne 0 ]; then
-      pull $dir
-    fi
+    [ -d $dir ] && pull $dir
   done
 }
 
