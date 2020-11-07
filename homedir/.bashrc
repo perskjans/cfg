@@ -78,29 +78,53 @@ bind -x '"\C-l": clear;'
     export LC_IDENTIFICATION="en_US.UTF-8"
 
   ## Terminal colors
-    export TC_RESET="\033[0m"
+    export TC_RESET="\[$(tput sgr0)\]"
 
-    export TC_BRIGHT="\033[1m"
-    export TC_UNDERSCORE="\033[4m"
-    export TC_REVERSE="\033[7m"
+    export TC_BRIGHT="\[$(tput bold)\]"
+    export TC_UNDERSCORE="\[$(tput smul)\]"
+    export TC_REVERSE="\[$(tput rev)\]"
 
-    export TC_FG_BLACK="\033[30m"
-    export TC_FG_RED="\033[31m"
-    export TC_FG_GREEN="\033[32m"
-    export TC_FG_YELLOW="\033[33m"
-    export TC_FG_BLUE="\033[34m"
-    export TC_FG_MAGENTA="\033[35m"
-    export TC_FG_CYAN="\033[36m"
-    export TC_FG_WHITE="\033[37m"
+    export TC_FG_BLACK="\[$(tput setaf 0)\]"
+    export TC_FG_RED="\[$(tput setaf 1)\]"
+    export TC_FG_GREEN="\[$(tput setaf 2)\]"
+    export TC_FG_YELLOW="\[$(tput setaf 3)\]"
+    export TC_FG_BLUE="\[$(tput setaf 4)\]"
+    export TC_FG_MAGENTA="\[$(tput setaf 5)\]"
+    export TC_FG_CYAN="\[$(tput setaf 6)\]"
+    export TC_FG_WHITE="\[$(tput setaf 7)\]"
 
-    export TC_BG_BLACK="\033[40m"
-    export TC_BG_RED="\033[41m"
-    export TC_BG_GREEN="\033[42m"
-    export TC_BG_YELLOW="\033[43m"
-    export TC_BG_BLUE="\033[44m"
-    export TC_BG_MAGENTA="\033[45m"
-    export TC_BG_CYAN="\033[46m"
-    export TC_BG_WHITE="\033[47m"
+    export TC_BG_BLACK="\[$(tput setab 0)\]"
+    export TC_BG_RED="\[$(tput setab 1)\]"
+    export TC_BG_GREEN="\[$(tput setab 2)\]"
+    export TC_BG_YELLOW="\[$(tput setab 3)\]"
+    export TC_BG_BLUE="\[$(tput setab 4)\]"
+    export TC_BG_MAGENTA="\[$(tput setab 5)\]"
+    export TC_BG_CYAN="\[$(tput setab 6)\]"
+    export TC_BG_WHITE="\[$(tput setab 7)\]"
+
+    #export TC_RESET="\033[0m"
+
+    #export TC_BRIGHT="\033[1m"
+    #export TC_UNDERSCORE="\033[4m"
+    #export TC_REVERSE="\033[7m"
+
+    #export TC_FG_BLACK="\033[30m"
+    #export TC_FG_RED="\033[31m"
+    #export TC_FG_GREEN="\033[32m"
+    #export TC_FG_YELLOW="\033[33m"
+    #export TC_FG_BLUE="\033[34m"
+    #export TC_FG_MAGENTA="\033[35m"
+    #export TC_FG_CYAN="\033[36m"
+    #export TC_FG_WHITE="\033[37m"
+
+    #export TC_BG_BLACK="\033[40m"
+    #export TC_BG_RED="\033[41m"
+    #export TC_BG_GREEN="\033[42m"
+    #export TC_BG_YELLOW="\033[43m"
+    #export TC_BG_BLUE="\033[44m"
+    #export TC_BG_MAGENTA="\033[45m"
+    #export TC_BG_CYAN="\033[46m"
+    #export TC_BG_WHITE="\033[47m"
 
   ## XDG
     export XDG_CONFIG_HOME="$HOME/.config"
@@ -346,30 +370,31 @@ bind -x '"\C-l": clear;'
     promptcmd()
     {
         local exitstatus=$?
-        local exitcolor=${TC_FG_GREEN}
+        local exitcolor="${TC_FG_GREEN}"
 
         if [ $exitstatus -ne 0 ]; then
-            exitcolor=${TC_FG_RED}
+            exitcolor="${TC_FG_RED}"
         fi
 
-        userco=$TC_FG_GREEN
+        userco="$TC_FG_GREEN"
 
         if [ "$UID" == "0" ]; then
-            userco=$TC_FG_RED
+            userco="$TC_FG_RED"
         fi
 
         local LNS="${TC_FG_BLUE}\n#${TC_RESET}"
         local LBRACK="${TC_FG_BLUE}[${TC_RESET}"
         local RBRACK="${TC_FG_BLUE}]${TC_RESET}"
-        local EXIT=${exitcolor}${exitstatus}${TC_RESET}
-        local DATE=$(date +%H:%M)
-        local USR=${userco}${USER}${TC_RESET}
-        local HOST=${userco}$(get_hostname)${TC_RESET}
-        local CWD=${TC_FG_YELLOW}$(pwd)${TC_RESET}
-        local GITSTATUS=$(p_gitutils current_status)
+        local EXIT="${exitcolor}${exitstatus}${TC_RESET}"
+        local DATE="$(date +%H:%M)"
+        local USR="${userco}${USER}${TC_RESET}"
+        local HOST="${userco}$(get_hostname)${TC_RESET}"
+        local CWD="${TC_FG_YELLOW}$(pwd)${TC_RESET}"
+        local GITSTATUS="$(p_gitutils current_status)"
+        local CLNS="${TC_FG_BLUE}\n#$ ${TC_RESET}"
 
         export PS1=''
-        export PS1="${LNS}${LBRACK}${EXIT}${RBRACK}${LBRACK}${DATE}${RBRACK}${LBRACK}${USR}@${HOST}: ${CWD}${RBRACK}${GITSTATUS}${LNS}\$ "
+        export PS1="${LNS}${LBRACK}${EXIT}${RBRACK}${LBRACK}${DATE}${RBRACK}${LBRACK}${USR}@${HOST}: ${CWD}${RBRACK}${GITSTATUS}${CLNS}"
     }
     export PROMPT_COMMAND=promptcmd
 
