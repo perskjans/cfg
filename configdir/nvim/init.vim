@@ -170,7 +170,7 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
         "scrolloff	number of screen lines to show around the cursor
             set so=5
         "wrap	long lines wrap (local to window)
-            set nowrap
+            set wrap
         "linebreak	wrap long lines at a character in 'breakat' (local to window)
             set lbr
         "breakindent	preserve indentation in wrapped text (local to window)
