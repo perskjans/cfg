@@ -16,21 +16,21 @@ commit_status()
     do
         case $line in
         new)
-            P_GIT_STATUS="$P_GIT_STATUS ${TC_FG_YELLOW}N${TC_RESET}" ;;
+            P_GIT_STATUS="$P_GIT_STATUS \[${TC_FG_YELLOW}\]N\[${TC_RESET}\]" ;;
         untracked)
-            P_GIT_STATUS="$P_GIT_STATUS ${TC_FG_CYAN}U${TC_RESET}" ;;
+            P_GIT_STATUS="$P_GIT_STATUS \[${TC_FG_CYAN}\]U\[${TC_RESET}\]" ;;
         modified)
-            P_GIT_STATUS="$P_GIT_STATUS ${TC_FG_BLUE}M${TC_RESET}" ;;
+            P_GIT_STATUS="$P_GIT_STATUS \[${TC_FG_BLUE}\]M\[${TC_RESET}\]" ;;
         deleted)
-            P_GIT_STATUS="$P_GIT_STATUS ${TC_FG_RED}D${TC_RESET}" ;;
+            P_GIT_STATUS="$P_GIT_STATUS \[${TC_FG_RED}\]D\[${TC_RESET}\]" ;;
         renamed)
-            P_GIT_STATUS="$P_GIT_STATUS ${TC_FG_MAGENTA}R${TC_RESET}" ;;
+            P_GIT_STATUS="$P_GIT_STATUS \[${TC_FG_MAGENTA}\]R\[${TC_RESET}\]" ;;
         copied)
-            P_GIT_STATUS="${TC_FG_MAGENTA}C${TC_RESET} $P_GIT_STATUS ," ;;
+            P_GIT_STATUS="\[${TC_FG_MAGENTA}\]C\[${TC_RESET}\] $P_GIT_STATUS ," ;;
         unstage)
-            P_GIT_STATUS="$P_GIT_STATUS ${TC_FG_GREEN}S${TC_RESET}" ;;
+            P_GIT_STATUS="$P_GIT_STATUS \[${TC_FG_GREEN}\]S\[${TC_RESET}\]" ;;
         conflict)
-            P_GIT_STATUS="$P_GIT_STATUS ${TC_FG_RED}UU${TC_RESET}" ;;
+            P_GIT_STATUS="$P_GIT_STATUS \[${TC_FG_RED}\]UU\[${TC_RESET}\]" ;;
         *)
             P_GIT_STATUS="UNKNOWN STATUS"
             return 1
@@ -52,15 +52,13 @@ current_status()
 
     if git rev-parse --git-dir >/dev/null 2>&1; then
         gs_branch=$(getbranch)
-        #gs_gitstatus=$(commit_status)
         commit_status
 
         if [ $? -eq 0 ]; then
-            #if [ -z "$gs_gitstatus" ]; then
             if [ -z "$P_GIT_STATUS" ]; then
-              echo -e "${TC_FG_BLUE}[${TC_RESET}GIT: '$gs_branch' ${TC_FG_GREEN}Up-to-date${TC_RESET}${TC_FG_BLUE}]${TC_RESET}"
+              echo -e "GIT: '$gs_branch' \[${TC_FG_GREEN}\]Up-to-date\[${TC_RESET}\]"
             else
-              echo -e "${TC_FG_BLUE}[${TC_RESET}GIT: '$gs_branch'$P_GIT_STATUS${TC_FG_BLUE}]${TC_RESET}"
+              echo -e "GIT: '$gs_branch'$P_GIT_STATUS"
             fi
         fi
     fi
