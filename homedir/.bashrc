@@ -340,10 +340,10 @@ bind -x '"\C-l": clear;'
             alias pr='sudo zypper rm --clean-deps '
             alias pc='sudo zypper clean all '
             alias pu='sudo zypper up '
-            alias pq='sudo zypper pa | grep "i+" '
-            alias pdu='sudo zyper dup '
-            alias pqr='sudo zyper se '
-            alias prd='sudo zyper rm --clean-deps $(sudo zypper | grep "^i" | cut -d'|' -f3)'
+            alias pq='sudo zypper pa | grep "^i+" '
+            alias pdu='sudo zypper dup '
+            alias pqr='sudo zypper se '
+            alias prd='sudo zypper rm --clean-deps $(sudo zypper | grep "^i" | cut -d"|" -f3)'
         ;;
 
         void)
