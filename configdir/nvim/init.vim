@@ -1162,7 +1162,6 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
 
         " Show open buffers
             nnoremap <F4> :buffers<CR>:b
-            nnoremap í :buffers<CR>:b
 
         " Reload current buffer
             nnoremap <F5> :e<cr>
