@@ -822,6 +822,10 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
             let g:PyFlakeAggressive = 0
             let g:PyFlakeDisabledMessages = 'E262,E265,E402,E501'
 
+        elseif plugin == 'ale'
+            let g:ale_linters = {'python': ['flake8']}
+            let g:ale_fixers = {'python': ['black']}
+
         elseif plugin == 'indentline'
             let g:indentLine_char = '|'
             let g:indentLine_noConcealCursor=""
@@ -1118,7 +1122,7 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
             nnoremap Q gq
 
         " open cmd find
-            nnoremap å :find 
+            nnoremap å :find
 
         " Move between open buffers
             nnoremap th :bp<CR>
@@ -1185,6 +1189,9 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
             nnoremap <silent> <F9>  :cn<cr>
             nnoremap <silent> <F10> :call perers#functions#toggle_quicktfix_window()<cr>
 
+        " Include/define jump
+            nnoremap ì :execute 'ij ' . expand('<cword>') . ' '<cr>
+            nnoremap Ì :execute 'dj ' . expand('<cword>') . ' '<cr>
 
         " Reselect last-pasted text
             nnoremap gp `[v`]

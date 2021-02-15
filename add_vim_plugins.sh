@@ -18,9 +18,10 @@ repos=(
     #tpope/vim-surround
     #tpope/vim-vinegar
     #vim-syntastic/syntastic
+    dense-analysis/ale
     Dreiparrent/vim-json
     airblade/vim-gitgutter
-    andviro/flake8-vim
+    #andviro/flake8-vim
     frazrepo/vim-rainbow
     #lilydjwg/colorizer
     mcchrish/nnn.vim
