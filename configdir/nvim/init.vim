@@ -1190,8 +1190,8 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
             nnoremap <silent> <F10> :call perers#functions#toggle_quicktfix_window()<cr>
 
         " Include/define jump
-            nnoremap ì :execute 'ij ' . expand('<cword>') . ' '<cr>
-            nnoremap Ì :execute 'dj ' . expand('<cword>') . ' '<cr>
+            nnoremap í :execute 'ij ' . expand('<cword>') . ' '<cr>
+            nnoremap Í :execute 'dj ' . expand('<cword>') . ' '<cr>
 
         " Reselect last-pasted text
             nnoremap gp `[v`]
