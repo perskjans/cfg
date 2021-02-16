@@ -90,6 +90,7 @@ suse)
     pulseaudio \
     pulsemixer \
     qemu \
+    readline-devel
     sxhkd \
     sysstat \
     tmux \
@@ -99,6 +100,7 @@ suse)
     virt-manager \
     volumeicon \
     wget \
+    xorg-x11-devel \
     xterm \
     "
   sudo zypper install $packages
