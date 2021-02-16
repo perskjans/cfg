@@ -23,6 +23,8 @@ repos=(
     airblade/vim-gitgutter
     #andviro/flake8-vim
     frazrepo/vim-rainbow
+    junegunn/fzf
+    junegunn/fzf.vim
     #lilydjwg/colorizer
     mcchrish/nnn.vim
     rrethy/vim-hexokinase

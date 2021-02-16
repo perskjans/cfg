@@ -643,7 +643,7 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
         "suffixesadd	list of file name extensions added when searching for a file (local to buffer)
         "   set sua=
         "wildignore	list of patterns to ignore files for file name completion
-            set wildignore+=*/tmp/*,*.so,*.swp,*.zip           " MacOSX/Linux
+            set wildignore+=/tmp/*,*.so,*.swp,*.zip           " MacOSX/Linux
             set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.bak  " Windows
             set wildignore+=.hg,.git,.svn,*.fossil             " Version control
             set wildignore+=*.aux,*.out,*.toc                  " LaTeX intermediate files
@@ -653,7 +653,7 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
             set wildignore+=*.DS_Store                         " OSX bullshit
             set wildignore+=*.luac                             " Lua byte code
             set wildignore+=migrations                         " Django migrations
-            set wildignore+=*.pyc                              " Python byte code
+            set wildignore+=__pycache__,*__pycache__/*,*.pyc               " Python byte code
             set wildignore+=*.orig                             " Merge resolution files
             set wildignore+=bin                                " files in bin folder
             set wildignore+=nbproject                          " Netbeans project folder
@@ -836,6 +836,7 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
             let g:NERDTreeDirArrowExpandable = '+'
             let g:NERDTreeDirArrowCollapsible = '-'
             let NERDTreeHijackNetrw=1
+            let NERDTreeRespectWildIgnore=1
             autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
         elseif plugin == 'nnn.vim'
@@ -1273,7 +1274,7 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
 
     augroup save_load_folds_leaving_buffer
         au!
-        au BufWinLeave *,*.* silent mkview
+        au BufWinLeave *,*.* silent! mkview
         au BufWinEnter *,*.* silent! loadview
         augroup end
 
