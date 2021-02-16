@@ -54,7 +54,7 @@ bind -x '"\C-l": clear;'
     path=$HOME/.work/bin
     for d in $(find -L $HOME/bin -type d); do path=$path:$d; done
 
-    PATH=$path:$PATH
+    PATH=$path:$HOME/.local/bin:$PATH
     export PATH
 
   ## Locale
@@ -196,9 +196,11 @@ bind -x '"\C-l": clear;'
 
 ## ALIASES
 
-  alias e=$EDITOR
+  alias e=vim
   alias vi=$EDITOR
-  alias vim=$EDITOR
+  alias vim='vi -c "let g:tty='\''$(tty)'\''"'
+  alias epipe="$EDITOR -c 'set ft=man nomod nolist' -"
+  alias vimpipe='epipe'
 
   alias ..='cd ..'
   alias ...='cd ../..'
@@ -399,5 +401,9 @@ bind -x '"\C-l": clear;'
     }
     export PROMPT_COMMAND=promptcmd
 
+# source plugins
+for f in /home/perers/.config/shellfiles/bash/*; do . $f; done
+
 # source work specific files
 [ -d $HOME/.work/config ] && for f in $HOME/.work/config/*; do . $f; done
+
