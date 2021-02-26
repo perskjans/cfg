@@ -37,7 +37,7 @@ function! PyInclude(fname)
   if len(parts) > 1
     let r = parts[1] " conversion
     let joined = join([l, r], '.') " conv.conversion
-    let fp = substitute*joined, '\.', '/', 'g') . 'py'
+    let fp = substitute(joined, '\.', '/', 'g') . 'py'
     let found = glob(fp, 1)
 
     if len(found)
@@ -45,7 +45,7 @@ function! PyInclude(fname)
     endif
   endif
 
-  return substitute*joined, '\.', '/', 'g') . 'py'
+  return substitute(joined, '\.', '/', 'g') . 'py'
 endfunction
 
 setlocal includeexpr=PyInclude(v:fname)
