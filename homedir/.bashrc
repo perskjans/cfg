@@ -402,7 +402,7 @@ bind -x '"\C-l": clear;'
     export PROMPT_COMMAND=promptcmd
 
 # source plugins
-for f in /home/perers/.config/shellfiles/bash/*; do . $f; done
+for f in $HOME/.config/shellfiles/bash/*; do . $f; done
 
 # source work specific files
 [ -d $HOME/.work/config ] && for f in $HOME/.work/config/*; do . $f; done
