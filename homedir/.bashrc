@@ -127,18 +127,20 @@ bind -x '"\C-l": clear;'
     export TC_BG_WHITE="\033[47m"
 
   ## XDG
-    export XDG_CONFIG_HOME="$HOME/.config"
     export XDG_CACHE_HOME="$HOME/.cache"
+    export XDG_CONFIG_HOME="$HOME/.config"
     export XDG_DATA_HOME="$HOME/.local/share"
     export XDG_DESKTOP_DIR="$HOME/dsk"
-    export XDG_DOWNLOAD_DIR="$HOME/dwn"
-    export XDG_TEMPLATES_DIR="$HOME/tpl"
-    export XDG_PUBLICSHARE_DIR="$HOME/pub"
     export XDG_DOCUMENTS_DIR="$HOME/doc"
+    export XDG_DOWNLOAD_DIR="$HOME/dwn"
     export XDG_MUSIC_DIR="$HOME/mus"
     export XDG_PICTURES_DIR="$HOME/pic"
+    export XDG_PUBLICSHARE_DIR="$HOME/pub"
+    export XDG_RUNTIME_DIR="/home/perers/.cache/runtime"
+    export XDG_TEMPLATES_DIR="$HOME/tpl"
     export XDG_VIDEOS_DIR="$HOME/vid"
     mkdir -p $XDG_DATA_HOME/fonts
+    mkdir -p -m 700 $XDG_RUNTIME_DIR
 
   ## Misc
     [ $(command -v st) ] && export TERMINAL=st || export TERMINAL=xterm
