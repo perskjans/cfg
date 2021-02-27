@@ -18,7 +18,9 @@ endfor
 
 " pattern for include-search
 set include=^\\s*\\(from\\\|import\\)\\s*\\zs\\(\\S\\+\\s\\{-}\\)*\\ze\\($\\\|\as\\)
-"set include=\\v^\\s*\(from\|import\)\\s*\\zs\(\\S\\+\\s\\{-}\)*\\ze\($\|\as\)
+
+" Set define jump expression
+setlocal define=^\\s*\\<\\(def\\\|class\\)\\>
 
 " Function for include expression
 "
@@ -45,11 +47,7 @@ function! PyInclude(fname)
     endif
   endif
 
-  return substitute(joined, '\.', '/', 'g') . 'py'
+  return substitute(l '\.', '/', 'g') . 'py'
 endfunction
 
 setlocal includeexpr=PyInclude(v:fname)
-
-" Set define jump expression
-setlocal define=^\\s*\\<\\(def\\\|class\\)\\>
-"setlocal define=\\v^\\s*\<\(def\|class\)\>
