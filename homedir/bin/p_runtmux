@@ -10,9 +10,9 @@ fi
 echo session: $SESSION_NAME
 
 if [[ `tmux ls 2>/dev/null | grep "$SESSION_NAME" | wc -l` -eq 0 ]]; then
-  tmux -u -2 new -s $SESSION_NAME
+  tmux $HOME/.config/tmux/tmux.conf -u -2 new -s $SESSION_NAME
 else
-  tmux -u -2 a -t $SESSION_NAME
+  tmux $HOME/.config/tmux/tmux.conf -u -2 a -t $SESSION_NAME
 fi
 
 
