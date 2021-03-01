@@ -825,6 +825,10 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
         elseif plugin == 'ale'
             let g:ale_linters = {'python': ['flake8']}
             let g:ale_fixers = {'python': ['black']}
+            
+        elseif plugin == 'fzf.vim'
+            nnoremap <leader>f :Files<cr>
+            nnoremap <leader>b :Buffers<cr>
 
         elseif plugin == 'indentline'
             let g:indentLine_char = '|'
@@ -905,7 +909,7 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
             nnoremap <leader>r :%s```cg<Left><Left><Left><Left>
 
             " Close current buffer
-            nnoremap <leader>b :bd<CR>
+            nnoremap <leader>B :bd<CR>
 
             " Redraw screen and update synax sync
             nnoremap <leader>u :syntax sync fromstart<cr>:redraw<cr>
