@@ -10,8 +10,8 @@ setlocal wildignore=*.pyc
 
 for plugin in g:plugins
   if plugin == 'ale'
-    nnoremap <silent> <F8> :ALEPreviousWrap<cr>
-    nnoremap <silent> <F9> :ALENextWrap<cr>
+    nnoremap <silent> Ä :ALEPreviousWrap<cr>
+    nnoremap <silent> Ö :ALENextWrap<cr>
   endif
 endfor
 

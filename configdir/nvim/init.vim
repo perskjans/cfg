@@ -1123,18 +1123,13 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
             nnoremap Q gq
 
         " open cmd find
-            nnoremap å :find
+            nnoremap Ó :find 
 
         " Move between open buffers
             nnoremap th :bp<CR>
             nnoremap tt :bn<CR>
 
         " Movement
-            nnoremap ä <C-u> " Half page up
-            nnoremap Ä <C-b> " Full page up
-            nnoremap ç <C-d> " Half page down
-            nnoremap Ç <C-f> " Full page down
-
             nnoremap <A-e> gkzz
             nnoremap <A-n> gjzz
             nnoremap k gk
@@ -1185,9 +1180,16 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
             nnoremap <silent> <F7>  :make!<cr><cr><cr>:cw<cr><cr>
 
         " Quickfix
-            nnoremap <silent> <F8>  :cp<cr>
-            nnoremap <silent> <F9>  :cn<cr>
-            nnoremap <silent> <F10> :call perers#functions#toggle_quicktfix_window()<cr>
+            nnoremap <silent> å :cp<cr>
+            nnoremap <silent> ä :cp<cr>
+            nnoremap <silent> ö :cn<cr>
+            nnoremap <silent> ¶ :call perers#functions#toggle_quickfix_list()<cr>
+
+        " Locallist
+            nnoremap <silent> Å :ll<cr>
+            nnoremap <silent> Ä :lprevious<cr>
+            nnoremap <silent> Ö :lnext<cr>
+            nnoremap <silent> ° :call perers#functions#toggle_location_list()<cr>
 
         " Include/define jump
             nnoremap í :execute 'ij ' . expand('<cword>') . ' '<cr>
@@ -1252,7 +1254,6 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
         au QuickFixCmdPost [^l]* nested cwindow
         au QuickFixCmdPost    l* nested lwindow
         au FileType qf wincmd J
-        au BufReadPost quickfix let g:qfix_win = 1
         augroup END
 
     augroup visible_trailing_whitespace

@@ -34,17 +34,31 @@
     endfunction
 
 
-" Toggle quickfix window
-    function! perers#functions#toggle_quicktfix_window()
-        if exists("g:qfix_win")
+" Toggle quickfix list
+    augroup QuickfixToggle
+        au!
+        au BufReadPost quickfix let g:qfix_list = 1
+        augroup END
+
+    function! perers#functions#toggle_quickfix_list()
+        if exists("g:qfix_list")
             cclose
-            unlet g:qfix_win
+            unlet g:qfix_list
         else
-            let g:qfix_win = 1
+            let g:qfix_list = 1
             copen
         endif
     endfunction
 
+
+" Toggle locallist
+    function! perers#functions#toggle_location_list()
+        if get(getloclist(0, {'winid':0}), 'winid', 0)
+            lclose
+        else
+            lopen
+        endif
+    endfunction
 
 " Close all netrw buffers
     function! perers#functions#close_explorer_buffers()

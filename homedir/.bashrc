@@ -190,6 +190,7 @@ bind -x '"\C-l": clear;'
     export WGETRC="$XDG_CONFIG_HOME/wgetrc"
 
     export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
+    [ -f $XAUTHORITY ] || touch $XAUTHORITY
 
     export XINITRC="$XDG_CONFIG_HOME/X11/xinitrc"
     export XSERVERRC="$XDG_CONFIG_HME/X11/xserverrc"
