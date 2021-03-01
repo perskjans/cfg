@@ -820,12 +820,12 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
             let g:PyFlakeOnWrite = 1
             let g:PyFlakeCheckers = 'pep8'
             let g:PyFlakeAggressive = 0
-            let g:PyFlakeDisabledMessages = 'E262,E265,E402,E501'
+            let g:PyFlakeDisabledMessages = 'E262,E265,E402,E501,E722'
 
         elseif plugin == 'ale'
             let g:ale_linters = {'python': ['flake8']}
             let g:ale_fixers = {'python': ['black']}
-            
+
         elseif plugin == 'fzf.vim'
             nnoremap <leader>f :Files<cr>
             nnoremap <leader>b :Buffers<cr>
@@ -840,7 +840,7 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
             let g:NERDTreeDirArrowExpandable = '+'
             let g:NERDTreeDirArrowCollapsible = '-'
             let NERDTreeHijackNetrw=1
-            let NERDTreeRespectWildIgnore=1
+            "let NERDTreeRespectWildIgnore=1
             autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
         elseif plugin == 'nnn.vim'
@@ -909,7 +909,7 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
             nnoremap <leader>r :%s```cg<Left><Left><Left><Left>
 
             " Close current buffer
-            nnoremap <leader>B :bd<CR>
+            nnoremap <leader>B :bn<CR>:bd#<CR>
 
             " Redraw screen and update synax sync
             nnoremap <leader>u :syntax sync fromstart<cr>:redraw<cr>
@@ -1127,7 +1127,7 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
             nnoremap Q gq
 
         " open cmd find
-            nnoremap Ó :find 
+            nnoremap Ó :find
 
         " Move between open buffers
             nnoremap th :bp<CR>
@@ -1154,10 +1154,10 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
             nnoremap <right> <C-w>l
 
         " Resize window
-            nnoremap <silent> ¹ :vertical resize +2<cr>
-            nnoremap <silent> ² :vertical resize -2<cr>
-            nnoremap <silent> ³ :resize +2<cr>
-            nnoremap <silent> ¤ :resize -2<cr>
+            nnoremap <silent> ¡ :vertical resize +2<cr>
+            nnoremap <silent> º :vertical resize -2<cr>
+            nnoremap <silent> ª :resize +2<cr>
+            nnoremap <silent> ¢ :resize -2<cr>
             nnoremap <silent> € :wincmd =<cr>
 
         " Show open buffers
