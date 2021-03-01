@@ -136,7 +136,7 @@ bind -x '"\C-l": clear;'
     export XDG_MUSIC_DIR="$HOME/mus"
     export XDG_PICTURES_DIR="$HOME/pic"
     export XDG_PUBLICSHARE_DIR="$HOME/pub"
-    export XDG_RUNTIME_DIR="/home/perers/.cache/runtime"
+    export XDG_RUNTIME_DIR="$HOME/.cache/runtime"
     export XDG_TEMPLATES_DIR="$HOME/tpl"
     export XDG_VIDEOS_DIR="$HOME/vid"
     mkdir -p $XDG_DATA_HOME/fonts
