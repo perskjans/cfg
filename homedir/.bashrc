@@ -243,7 +243,6 @@ bind -x '"\C-l": clear;'
 
   alias xresources='. $HOME/.config/X11/xprofile'
 
-  alias tmux='tmux -u -f $HOME/.config/tmux/tmux.conf'
   alias tx='$HOME/bin/p_runtmux'
 
   ## Git related aliases
