@@ -39,6 +39,7 @@ if !exists('SCRATCHFILE')
     let $SCRATCHFILE = $VIMTMP . "/scratch.txt"     " Scratchfile for tmp usage
 endif
 
+let g:tty = $TTY
 let g:plugindir = $VIMDIR . "/pack/plugins/start/"
 
 
@@ -53,9 +54,9 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
         endif
 
         if exists('s:viminfo')
-            if exists('$SUDO_USER')
-                set nobackup                        " don't create root-owned files
-                set nowritebackup                   " don't create root-owned files
+            if exists('$SUDO_USER')        " don't create root-owned files
+                set nobackup
+                set nowritebackup
                 set viminfo=
                 execute 'set ' . s:viminfo . "="
             else
@@ -68,8 +69,7 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
                 set backupdir=$VIMTMP/backup//
                 set viewdir=$VIMTMP/view//
 
-                "                              +--Disable hlsearch while loading
-                "                              viminfo
+                "                              +--Disable hlsearch while loading viminfo
                 "                              | +--Remember marks for last 500 files
                 "                              | |    +--Remember up to 10000 lines in each register
                 "                              | |    |      +--Remember up to 1MB in each register
@@ -1127,7 +1127,7 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
             nnoremap Q gq
 
         " open cmd find
-            nnoremap Ó :find
+            nnoremap Ó :find 
 
         " Move between open buffers
             nnoremap th :bp<CR>
@@ -1297,7 +1297,7 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
 
     augroup vim_reload_config
         au!
-        au BufWritePost init.vim so $MYVIMRC
+        au BufWritePost nvi**/*.vim so %
         augroup END
 
     augroup applications_reload_on_config_change
