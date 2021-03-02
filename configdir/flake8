@@ -1,6 +1,8 @@
 [flake8]
 # ignore line lenght violations
 ignore = E501
+# module level import not at top of file
+ignore = E402
 
 exclude =
     # No need to traverse our git directory
