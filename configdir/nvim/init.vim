@@ -826,10 +826,6 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
             let g:ale_linters = {'python': ['flake8']}
             let g:ale_fixers = {'python': ['black']}
 
-        elseif plugin == 'fzf.vim'
-            nnoremap <leader>f :Files<cr>
-            nnoremap <leader>b :Buffers<cr>
-
         elseif plugin == 'indentline'
             let g:indentLine_char = '|'
             let g:indentLine_noConcealCursor=""
@@ -894,6 +890,10 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
             nnoremap <leader>q :q<cr>
             nnoremap <leader>qq :q!<cr>
 
+            " FZF
+            nnoremap <leader>f :Files<cr>
+            nnoremap <leader>b :Buffers<cr>
+
             " Switch to last used buffer in the window
             nnoremap <leader><leader> <C-^>
 
@@ -939,6 +939,9 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
 
             " Remove trailing whitespace...
             nnoremap <silent> <localleader>x mz :call perers#functions#trim_trailing_whitespace()<CR>`z
+
+            " Sync clipboard over ssh
+            nnoremap <silent> <localleader>y :call perers#functions#Osc52Yank()<CR>
 
             " Open scratch file
             nnoremap <localleader>z :e $SCRATCHFILE<cr>

@@ -192,8 +192,7 @@ bind -x '"\C-l": clear;'
 
     export WGETRC="$XDG_CONFIG_HOME/wgetrc"
 
-    export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
-    [ -f $XAUTHORITY ] || touch $XAUTHORITY
+    export XAUTHORITY="$HOME/.Xauthority"
 
     export XINITRC="$XDG_CONFIG_HOME/X11/xinitrc"
     export XSERVERRC="$XDG_CONFIG_HME/X11/xserverrc"
@@ -347,9 +346,9 @@ bind -x '"\C-l": clear;'
             alias pr='sudo zypper rm --clean-deps '
             alias pc='sudo zypper clean all '
             alias pu='sudo zypper up '
-            alias pq='sudo zypper pa | grep "^i+" '
+            alias pq='zypper pa | grep "^i+" | vimpipe'
             alias pdu='sudo zypper dup '
-            alias pqr='sudo zypper se '
+            alias pqr='zypper se | vimpipe'
             alias prd='sudo zypper rm --clean-deps $(sudo zypper | grep "^i" | cut -d"|" -f3)'
         ;;
 

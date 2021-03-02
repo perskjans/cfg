@@ -68,3 +68,11 @@
             endif
         endfor
     endfunction
+
+" Sync cliboard from over ssh session with operating system command 52
+   function! Osc52Yank()
+       let buffer=system('base64', @0)
+       let buffer=substitute(buffer, "\n", "", "")
+       let buffer='\e]52;c;'.buffer.'\e\'
+       silent execute "!echo -ne ".shellescape(buffer)." > ".shellescape(g:tty)
+    endfunction

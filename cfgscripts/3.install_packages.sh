@@ -20,7 +20,6 @@ arch)
     dunst \
     fossil \
     gcc \
-    herbstluftwm \
     libnotify \
     libvirt \
     make \
@@ -96,6 +95,7 @@ suse)
     tmux \
     transmission-cli \
     trayer \
+    unclutter \
     unzip \
     virt-manager \
     volumeicon \

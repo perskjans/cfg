@@ -1,7 +1,4 @@
 
-super + Return
-    ${TERMINAL}
-
 super + b
     chromium
 

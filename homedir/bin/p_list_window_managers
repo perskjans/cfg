@@ -1,7 +1,7 @@
-#!/bin/dash
+#!/bin/sh
 # vim: set filetype=sh shiftwidth=2 :
 
-wms=`grep "^Exec=" /usr/share/xsessions/* | cut -d'=' -f2`
+wms=`grep "^Exec=" /usr/share/xsessions/* | cut -d'=' -f2 | sort | uniq`  
 
 
 for wm in $wms

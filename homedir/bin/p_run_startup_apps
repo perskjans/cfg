@@ -1,12 +1,17 @@
 #!/bin/sh
 # vim: set filetype=sh shiftwidth=2 :
 
+#for cmd in \
+#  'dunst' \
+#  'nm-applet' \
+#  'sxhkd' \
+#  'unclutter -idle 1' \
+#  'volumeicon'
 for cmd in \
   'dunst' \
   'nm-applet' \
   'sxhkd' \
-  'unclutter -idle 1' \
-  'volumeicon'
+  'unclutter -idle 1'
 do
   set $cmd
   app=$1
