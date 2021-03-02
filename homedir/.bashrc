@@ -57,6 +57,9 @@ bind -x '"\C-l": clear;'
     PATH=$path:$HOME/.local/bin:$PATH
     export PATH
 
+  ## tty
+  export TTY=$(tty)
+
   ## Locale
     lang="sv_SE.UTF-8"
     langtime="en_DK.UTF-8"
@@ -201,7 +204,7 @@ bind -x '"\C-l": clear;'
 
   alias e=vim
   alias vi=$EDITOR
-  alias vim='vi -c "let g:tty='\''$(tty)'\''"'
+  alias vim='vi'
   alias epipe="$EDITOR -c 'set ft=man nomod nolist' -"
   alias vimpipe='epipe'
 
