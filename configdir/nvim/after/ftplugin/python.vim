@@ -47,7 +47,7 @@ function! PyInclude(fname)
     endif
   endif
 
-  return substitute(l '\.', '/', 'g') . 'py'
+  return substitute(l, '\.', '/', 'g') . 'py'
 endfunction
 
 setlocal includeexpr=PyInclude(v:fname)
