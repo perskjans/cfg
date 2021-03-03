@@ -1207,7 +1207,7 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
 
 
         " Panic Button
-            nnoremap <F12> mzggg?G`z
+        "   nnoremap <F12> mzggg?G`z
 
         " Keep the cursor_in place while joining lines
             nnoremap J mzJ`z
