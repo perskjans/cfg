@@ -831,7 +831,6 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
             let g:indentLine_noConcealCursor=""
 
         elseif plugin == 'nerdtree'
-            nnoremap þ :NERDTreeToggle<cr>
             let g:NERDTreeBookmarksFile = $VIMTMP . '/tmp/NERDTreeBookmarks'
             let g:NERDTreeDirArrowExpandable = '+'
             let g:NERDTreeDirArrowCollapsible = '-'
@@ -884,15 +883,19 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
             let maplocalleader="\\"
 
         " Leader
+            " Plugin mappings
+                " NERDTreeToggle
+                nnoremap <leader>t :NERDTreeToggle<cr>
+
+                " FZF
+                nnoremap <leader>f :Files<cr>
+                nnoremap <leader>b :Buffers<cr>
+
             " save, exit
             nnoremap <leader>w :w<cr>
             nnoremap <leader>ww :w!<cr>
             nnoremap <leader>q :q<cr>
             nnoremap <leader>qq :q!<cr>
-
-            " FZF
-            nnoremap <leader>f :Files<cr>
-            nnoremap <leader>b :Buffers<cr>
 
             " Switch to last used buffer in the window
             nnoremap <leader><leader> <C-^>
