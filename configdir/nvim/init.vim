@@ -884,6 +884,7 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
 
         " Leader
             " Plugin mappings
+
                 " NERDTreeToggle
                 nnoremap <leader>t :NERDTreeToggle<cr>
 
@@ -944,7 +945,7 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
             nnoremap <silent> <localleader>x mz :call perers#functions#trim_trailing_whitespace()<CR>`z
 
             " Sync clipboard over ssh
-            nnoremap <silent> <localleader>y :call perers#functions#Osc52Yank()<CR>
+            nnoremap <silent> <localleader>y :call perers#osc52#SendViaOSC52()<CR>
 
             " Open scratch file
             nnoremap <localleader>z :e $SCRATCHFILE<cr>
@@ -1303,7 +1304,7 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
 
     augroup vim_reload_config
         au!
-        au BufWritePost nvi**/*.vim so %
+        au BufWritePost */nvim/**/*.vim so %
         augroup END
 
     augroup applications_reload_on_config_change
