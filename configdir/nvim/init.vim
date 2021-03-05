@@ -808,66 +808,6 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
         "   set pyx=0
 
 
-" PLUGINS ===
-    " Load plugins
-    packloadall!
-
-    let g:plugins = split(substitute(glob(g:plugindir . '*'), g:plugindir, '', 'g'))
-
-    " Plugin config
-    for plugin in g:plugins
-        if plugin == 'flake8-vim'
-            let g:PyFlakeOnWrite = 1
-            let g:PyFlakeCheckers = 'pep8'
-            let g:PyFlakeAggressive = 0
-            let g:PyFlakeDisabledMessages = 'E262,E265,E402,E501,E722'
-
-        elseif plugin == 'ale'
-            let g:ale_linters = {'python': ['flake8']}
-            let g:ale_fixers = {'python': ['black']}
-
-        elseif plugin == 'indentline'
-            let g:indentLine_char = '|'
-            let g:indentLine_noConcealCursor=""
-
-        elseif plugin == 'nerdtree'
-            let g:NERDTreeBookmarksFile = $VIMTMP . '/tmp/NERDTreeBookmarks'
-            let g:NERDTreeDirArrowExpandable = '+'
-            let g:NERDTreeDirArrowCollapsible = '-'
-            let NERDTreeHijackNetrw=1
-            "let NERDTreeRespectWildIgnore=1
-            autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-        elseif plugin == 'nnn.vim'
-            " Show dotfiles
-            let g:nnn#command = 'nnn -H'
-
-        elseif plugin == 'vim-airline'
-            let g:airline#extensions#tabline#enabled = 1
-
-        elseif plugin == 'vim-hexokinase'
-            let g:Hexokinase_highlighters = ['backgroundfull']
-            let g:Hexokinase_optInPatterns = 'full_hex,triple_hex,rgb,rgba,hsl,hsla,colour_names'
-
-        elseif plugin == 'vim-json'
-            let g:vim_json_syntax_conceal = 0
-            let g:vim_json_syntax_concealcursor = 0
-
-        elseif plugin == 'vim-rainbow'
-            let g:rainbow_active = 1
-
-        endif
-    endfor
-
-    " netrw config
-        let g:netrw_home=$VIMTMP
-        "let g:netrw_banner=1 " Disable annoying banner
-        let g:netrw_browser_split=4 " Open in prior window
-        let g:netrw_altv=1 " Open splits to the right
-        let g:netrw_liststyle=3 " Tree view
-        let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+'
-
-
 " MAPPINGS ===
     " Command mode
         " Add sudo to write
@@ -884,13 +824,6 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
 
         " Leader
             " Plugin mappings
-
-                " NERDTreeToggle
-                nnoremap <leader>t :NERDTreeToggle<cr>
-
-                " FZF
-                nnoremap <leader>f :Files<cr>
-                nnoremap <leader>b :Buffers<cr>
 
             " save, exit
             nnoremap <leader>w :w<cr>
@@ -1243,6 +1176,72 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
             nnoremap á za
             nnoremap µ zm
             nnoremap ® zr
+
+
+" PLUGINS ==
+    " Load plugins
+    packloadall!
+
+    let g:plugins = split(substitute(glob(g:plugindir . '*'), g:plugindir, '', 'g'))
+
+    " Plugin config
+    for plugin in g:plugins
+        if plugin == 'flake8-vim'
+            let g:PyFlakeOnWrite = 1
+            let g:PyFlakeCheckers = 'pep8'
+            let g:PyFlakeAggressive = 0
+            let g:PyFlakeDisabledMessages = 'E262,E265,E402,E501,E722'
+
+        elseif plugin == 'ale'
+            let g:ale_linters = {'python': ['flake8']}
+            let g:ale_fixers = {'python': ['black']}
+
+        elseif plugin == 'fzf.vim'
+            nnoremap <leader>f :Files<cr>
+            nnoremap <leader>b :Buffers<cr>
+
+        elseif plugin == 'indentline'
+            let g:indentLine_char = '|'
+            let g:indentLine_noConcealCursor=""
+
+        elseif plugin == 'nerdtree'
+            nnoremap <leader>t :NERDTreeToggle<cr>
+
+            let g:NERDTreeBookmarksFile = $VIMTMP . '/tmp/NERDTreeBookmarks'
+            let g:NERDTreeDirArrowExpandable = '+'
+            let g:NERDTreeDirArrowCollapsible = '-'
+            let NERDTreeHijackNetrw=1
+            "let NERDTreeRespectWildIgnore=1
+            autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+        elseif plugin == 'nnn.vim'
+            " Show dotfiles
+            let g:nnn#command = 'nnn -H'
+
+        elseif plugin == 'vim-airline'
+            let g:airline#extensions#tabline#enabled = 1
+
+        elseif plugin == 'vim-hexokinase'
+            let g:Hexokinase_highlighters = ['backgroundfull']
+            let g:Hexokinase_optInPatterns = 'full_hex,triple_hex,rgb,rgba,hsl,hsla,colour_names'
+
+        elseif plugin == 'vim-json'
+            let g:vim_json_syntax_conceal = 0
+            let g:vim_json_syntax_concealcursor = 0
+
+        elseif plugin == 'vim-rainbow'
+            let g:rainbow_active = 1
+
+        endif
+    endfor
+
+    " netrw config
+        let g:netrw_home=$VIMTMP
+        "let g:netrw_banner=1 " Disable annoying banner
+        let g:netrw_browser_split=4 " Open in prior window
+        let g:netrw_altv=1 " Open splits to the right
+        let g:netrw_liststyle=3 " Tree view
+        let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+'
 
 
 " AUTO COMMANDS ===
