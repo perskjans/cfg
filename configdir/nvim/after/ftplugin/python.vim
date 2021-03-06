@@ -8,12 +8,10 @@ set smartindent
 setlocal path=.,**
 setlocal wildignore=*.pyc
 
-for plugin in g:plugins
-  if plugin == 'ale'
-    nnoremap <silent> Ä :ALEPreviousWrap<cr>
-    nnoremap <silent> Ö :ALENextWrap<cr>
-  endif
-endfor
+if index(g:myplugins, 'ale') >= 0
+  nnoremap <silent> Ä :ALEPreviousWrap<cr>
+  nnoremap <silent> Ö :ALENextWrap<cr>
+endif
 
 
 " pattern for include-search

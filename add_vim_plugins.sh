@@ -3,7 +3,7 @@
 cfgroot=$(dirname $(realpath $0))
 cd $cfgroot/configdir/nvim/pack/plugins/start
 
-repos=(
+    #andviro/flake8-vim
     #easymotion/vim-easymotion
     #embear/vim-foldsearch
     #guns/xterm-color-table.vim
@@ -17,17 +17,17 @@ repos=(
     #tpope/vim-commentary
     #tpope/vim-surround
     #tpope/vim-vinegar
+    #rrethy/vim-hexokinase
     #vim-syntastic/syntastic
+
+both=(
     dense-analysis/ale
     Dreiparrent/vim-json
     airblade/vim-gitgutter
-    #andviro/flake8-vim
     frazrepo/vim-rainbow
     junegunn/fzf
     junegunn/fzf.vim
-    #lilydjwg/colorizer
     mcchrish/nnn.vim
-    rrethy/vim-hexokinase
     scrooloose/nerdtree
     tpope/vim-fugitive
     vim-airline/vim-airline
@@ -36,8 +36,16 @@ repos=(
     yggdroot/indentline
 )
 
-for repo in ${repos[*]}
-do
+nvim=(
+    norcalli/nvim-colorizer.lua
+)
+
+vim=(
+    lilydjwg/colorizer
+)
+
+function getrepo()
+{
     name=${repo#*/}
     if [ $(echo "$repo" | grep -c "^http") -eq 0 ]; then
         repo="https://github.com/$repo"
@@ -52,4 +60,21 @@ do
         fi
         echo
     fi
+}
+
+for repo in ${both[*]}
+do
+    getrepo "$repo"
 done
+
+if [[ $(command -v nvim) ]]; then
+  for repo in ${nvim[*]}
+  do
+      getrepo "$repo"
+  done
+else
+  for repo in ${vim[*]}
+  do
+      getrepo "$repo"
+  done
+fi

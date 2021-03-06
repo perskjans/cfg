@@ -40,7 +40,7 @@ if !exists('SCRATCHFILE')
 endif
 
 let g:tty = $TTY
-let g:plugindir = $VIMDIR . "/pack/plugins/start/"
+let g:myplugindir = $VIMDIR . "/pack/plugins/start/"
 
 
 " SETTINGS ===
@@ -1182,10 +1182,10 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
     " Load plugins
     packloadall!
 
-    let g:plugins = split(substitute(glob(g:plugindir . '*'), g:plugindir, '', 'g'))
+    let g:myplugins = split(substitute(glob(g:myplugindir . '*'), g:myplugindir, '', 'g'))
 
     " Plugin config
-    for plugin in g:plugins
+    for plugin in g:myplugins
         if plugin == 'flake8-vim'
             let g:PyFlakeOnWrite = 1
             let g:PyFlakeCheckers = 'pep8'
@@ -1218,12 +1218,11 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
             " Show dotfiles
             let g:nnn#command = 'nnn -H'
 
+        elseif plugin == 'nvim-colorizer.lua'
+            lua require'colorizer'.setup()
+
         elseif plugin == 'vim-airline'
             let g:airline#extensions#tabline#enabled = 1
-
-        elseif plugin == 'vim-hexokinase'
-            let g:Hexokinase_highlighters = ['backgroundfull']
-            let g:Hexokinase_optInPatterns = 'full_hex,triple_hex,rgb,rgba,hsl,hsla,colour_names'
 
         elseif plugin == 'vim-json'
             let g:vim_json_syntax_conceal = 0
@@ -1303,7 +1302,7 @@ let g:plugindir = $VIMDIR . "/pack/plugins/start/"
 
     augroup vim_reload_config
         au!
-        au BufWritePost */nvim/**/*.vim so %
+        au BufWritePost init.vim so %
         augroup END
 
     augroup applications_reload_on_config_change

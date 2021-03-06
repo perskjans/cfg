@@ -154,16 +154,16 @@ endif
 
 "hi link EndOfBuffer ColorColumn
 
-" StatusLine related
-    hi StatusLine       cterm=NONE    ctermfg=238     ctermbg=253    guifg=#444444   guibg=#dadada
-    hi StatusLineNC     cterm=NONE    ctermfg=244     ctermbg=232    guifg=#808080   guibg=#080808
-
-    highlight User1     cterm=None    ctermfg=NONE    ctermbg=52     guifg=NONE      guibg=#5f0000
-    highlight User2     cterm=None    ctermfg=blue    ctermbg=red    guifg=blue      guibg=red
-    highlight User3     cterm=None    ctermfg=green   ctermbg=blue   guifg=green     guibg=blue
-    highlight User4     cterm=None    ctermfg=red     ctermbg=green  guifg=red       guibg=green
-    highlight User5     cterm=None    ctermfg=blue    ctermbg=red    guifg=blue      guibg=red
-    highlight User6     cterm=None    ctermfg=green   ctermbg=blue   guifg=green     guibg=blue
-    highlight User7     cterm=None    ctermfg=red     ctermbg=green  guifg=red       guibg=green
-    highlight User8     cterm=None    ctermfg=blue    ctermbg=red    guifg=blue      guibg=red
-    highlight User9     cterm=None    ctermfg=green   ctermbg=blue   guifg=green     guibg=blue
+"" StatusLine related
+"    hi StatusLine       cterm=NONE    ctermfg=238     ctermbg=253    guifg=#444444   guibg=#dadada
+"    hi StatusLineNC     cterm=NONE    ctermfg=244     ctermbg=232    guifg=#808080   guibg=#080808
+"
+"    highlight User1     cterm=None    ctermfg=NONE    ctermbg=52     guifg=NONE      guibg=#5f0000
+"    highlight User2     cterm=None    ctermfg=blue    ctermbg=red    guifg=blue      guibg=red
+"    highlight User3     cterm=None    ctermfg=green   ctermbg=blue   guifg=green     guibg=blue
+"    highlight User4     cterm=None    ctermfg=red     ctermbg=green  guifg=red       guibg=green
+"    highlight User5     cterm=None    ctermfg=blue    ctermbg=red    guifg=blue      guibg=red
+"    highlight User6     cterm=None    ctermfg=green   ctermbg=blue   guifg=green     guibg=blue
+"    highlight User7     cterm=None    ctermfg=red     ctermbg=green  guifg=red       guibg=green
+"    highlight User8     cterm=None    ctermfg=blue    ctermbg=red    guifg=blue      guibg=red
+"    highlight User9     cterm=None    ctermfg=green   ctermbg=blue   guifg=green     guibg=blue
