@@ -1,5 +1,10 @@
 #!/bin/bash
 
+editor=nvim
+if [[ "$1" != "" ]]; then
+    editor=vim
+fi
+
 cfgroot=$(dirname $(realpath $0))
 cd $cfgroot/configdir/nvim/pack/plugins/start
 
@@ -67,7 +72,7 @@ do
     getrepo "$repo"
 done
 
-if [[ $(command -v nvim) ]]; then
+if [[ $editor == nvim ]]; then
   for repo in ${nvim[*]}
   do
       getrepo "$repo"
