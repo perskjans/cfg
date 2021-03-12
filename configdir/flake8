@@ -1,6 +1,6 @@
 [flake8]
 ignore =
-    # ignore line lenght violations
+    # ignore line length violations
     E501,
     # module level import not at top of file
     E402,
