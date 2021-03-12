@@ -17,23 +17,27 @@ cd $cfgroot/configdir/nvim/pack/plugins/start
     #neoclide/coc.nvim
     #neovim/nvim-lspconfig
     #pangloss/vim-javascript
+    #preservim/tagbar
     #rhysd/vim-clang-format
     #richsoni/vim-ecliptic
-    #tpope/vim-commentary
     #tpope/vim-surround
     #tpope/vim-vinegar
     #rrethy/vim-hexokinase
     #vim-syntastic/syntastic
 
 both=(
+    alvan/vim-closetag
+    davidhalter/jedi-vim
     dense-analysis/ale
     Dreiparrent/vim-json
     airblade/vim-gitgutter
     frazrepo/vim-rainbow
     junegunn/fzf
     junegunn/fzf.vim
+    lepture/vim-jinja
     mcchrish/nnn.vim
     scrooloose/nerdtree
+    tpope/vim-commentary
     tpope/vim-fugitive
     vim-airline/vim-airline
     vim-scripts/AutoComplPop

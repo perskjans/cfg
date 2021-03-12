@@ -9,10 +9,9 @@ setlocal path=.,**
 setlocal wildignore=*.pyc
 
 if index(g:myplugins, 'ale') >= 0
-  nnoremap <silent> Ä :ALEPreviousWrap<cr>
-  nnoremap <silent> Ö :ALENextWrap<cr>
+  nnoremap <buffer> <silent> Ä :ALEPreviousWrap<cr>
+  nnoremap <buffer> <silent> Ö :ALENextWrap<cr>
 endif
-
 
 " pattern for include-search
 set include=^\\s*\\(from\\\|import\\)\\s*\\zs\\(\\S\\+\\s\\{-}\\)*\\ze\\($\\\|\as\\)

@@ -807,6 +807,92 @@ let g:myplugindir = $VIMDIR . "/pack/plugins/start/"
         "pyxversion	whether to use Python 2 or 3
         "   set pyx=0
 
+" Set leader keys. Must be set before loading plugins.
+" Default <leader> is \ (backslash)
+    let mapleader="\<space>"
+    let maplocalleader="\\"
+
+
+" PLUGINS ==
+    " Load plugins
+    packloadall!
+
+    let g:myplugins = split(substitute(glob(g:myplugindir . '*'), g:myplugindir, '', 'g'))
+
+    " Plugin config
+    for plugin in g:myplugins
+        if plugin == 'flake8-vim'
+            let g:PyFlakeOnWrite = 1
+            let g:PyFlakeCheckers = 'pep8'
+            let g:PyFlakeAggressive = 0
+            let g:PyFlakeDisabledMessages = 'E262,E265,E402,E501,E722'
+
+        elseif plugin == 'ale'
+            let g:ale_linters = {'python': ['flake8']}
+            let g:ale_fixers = {'python': ['black']}
+
+        elseif plugin == 'fzf.vim'
+            nnoremap <leader>f :Files<cr>
+            nnoremap <leader>b :Buffers<cr>
+
+        elseif plugin == 'indentline'
+            let g:indentLine_char = '|'
+            let g:indentLine_noConcealCursor=""
+
+        elseif plugin == 'jedi-vim'
+            let g:jedi#goto_command = "<leader>ld"
+            let g:jedi#goto_assignments_command = "<leader>la"
+            let g:jedi#goto_stubs_command = "<leader>ls"
+            let g:jedi#goto_definitions_command = ""
+            let g:jedi#docuentation_command = "K"
+            let g:jedi#usages_command = "<leader>lu"
+            let g:jedi#completions_command = "<C-n>"
+            let g:jedi#rename_command = "<leader>lr"
+
+            let g:jedi#auto_vim_configuration = 0
+            let g:jedi#use_splits_not_buffers = 'winwidth'
+
+        elseif plugin == 'nerdtree'
+            nnoremap <leader>t :NERDTreeToggle<cr>
+
+            let g:NERDTreeBookmarksFile = $VIMTMP . '/tmp/NERDTreeBookmarks'
+            let g:NERDTreeDirArrowExpandable = '+'
+            let g:NERDTreeDirArrowCollapsible = '-'
+            let NERDTreeHijackNetrw=1
+            "let NERDTreeRespectWildIgnore=1
+            autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+        elseif plugin == 'nnn.vim'
+            " Show dotfiles
+            let g:nnn#command = 'nnn -H'
+
+        elseif plugin == 'nvim-colorizer.lua'
+            lua require'colorizer'.setup()
+
+        elseif plugin == 'vim-airline'
+            let g:airline#extensions#tabline#enabled = 1
+
+        elseif plugin == 'vim-closetag'
+            let g:closetag_filetypes = 'html,xhtml,phtml,xml'
+
+        elseif plugin == 'vim-json'
+            let g:vim_json_syntax_conceal = 0
+            let g:vim_json_syntax_concealcursor = 0
+
+        elseif plugin == 'vim-rainbow'
+            let g:rainbow_active = 1
+
+        endif
+    endfor
+
+    " netrw config
+        let g:netrw_home=$VIMTMP
+        "let g:netrw_banner=1 " Disable annoying banner
+        let g:netrw_browser_split=4 " Open in prior window
+        let g:netrw_altv=1 " Open splits to the right
+        let g:netrw_liststyle=3 " Tree view
+        let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+'
+
 
 " MAPPINGS ===
     " Command mode
@@ -814,14 +900,13 @@ let g:myplugindir = $VIMDIR . "/pack/plugins/start/"
         cnoremap w!! w !sudo tee % >/dev/null
 
     " Visual mode
+        " Quick way to exit insert mode
+        vnoremap tn <ESC>
+
         " Make BS/DEL work as expected in visual modes (i.e. delete the selected text).
         vmap <BS> x
 
     " Leader mappings
-        " Set leader keys. Default <leader> is \ (backslash)
-            let mapleader="\<space>"
-            let maplocalleader="\\"
-
         " Leader
             " Plugin mappings
 
@@ -866,13 +951,13 @@ let g:myplugindir = $VIMDIR . "/pack/plugins/start/"
             nnoremap <silent> <localleader>n :call perers#functions#cycle_numbering()<CR>
 
             " Sort lines
-            vnoremap <localleader>s :!sort<cr>
+            vnoremap <localleader>s :sort<cr>
 
             " Wrap
             nnoremap <localleader>w :set wrap!<cr> :set wrap?<cr>
 
             " Toggle [i]nvisible characters
-            nnoremap <localleader>i :set list!<cr> :set list?<cr>
+            nnoremap <localleader>l :set list!<cr> :set list?<cr>
 
             " Remove trailing whitespace...
             nnoremap <silent> <localleader>x mz :call perers#functions#trim_trailing_whitespace()<CR>`z
@@ -886,17 +971,15 @@ let g:myplugindir = $VIMDIR . "/pack/plugins/start/"
             " Close netrw buffers
             nnoremap <silent> <localleader>o :call perers#functions#close_explorer_buffers()<cr>
 
+
     " Insert mode
         " Quick way to exit insert mode
         inoremap tn <ESC>
 
-        " cursor one word left/right
-            inoremap á <S-LEFT>
-            inoremap í <S-RIGHT>
-
         " line down/up, to column where inserting started
-            inoremap ó <C-g><Down>
-            inoremap é <C-g><Up>
+            inoremap <S-Up> <C-g><Up>
+            inoremap <S-Down> <C-g><Down>
+
 
         " Uppercase word mapping.
             "
@@ -1067,7 +1150,7 @@ let g:myplugindir = $VIMDIR . "/pack/plugins/start/"
             nnoremap Q gq
 
         " open cmd find
-            nnoremap Ó :find 
+            nnoremap Ó :find
 
         " Move between open buffers
             nnoremap th :bp<CR>
@@ -1176,71 +1259,6 @@ let g:myplugindir = $VIMDIR . "/pack/plugins/start/"
             nnoremap á za
             nnoremap µ zm
             nnoremap ® zr
-
-
-" PLUGINS ==
-    " Load plugins
-    packloadall!
-
-    let g:myplugins = split(substitute(glob(g:myplugindir . '*'), g:myplugindir, '', 'g'))
-
-    " Plugin config
-    for plugin in g:myplugins
-        if plugin == 'flake8-vim'
-            let g:PyFlakeOnWrite = 1
-            let g:PyFlakeCheckers = 'pep8'
-            let g:PyFlakeAggressive = 0
-            let g:PyFlakeDisabledMessages = 'E262,E265,E402,E501,E722'
-
-        elseif plugin == 'ale'
-            let g:ale_linters = {'python': ['flake8']}
-            let g:ale_fixers = {'python': ['black']}
-
-        elseif plugin == 'fzf.vim'
-            nnoremap <leader>f :Files<cr>
-            nnoremap <leader>b :Buffers<cr>
-
-        elseif plugin == 'indentline'
-            let g:indentLine_char = '|'
-            let g:indentLine_noConcealCursor=""
-
-        elseif plugin == 'nerdtree'
-            nnoremap <leader>t :NERDTreeToggle<cr>
-
-            let g:NERDTreeBookmarksFile = $VIMTMP . '/tmp/NERDTreeBookmarks'
-            let g:NERDTreeDirArrowExpandable = '+'
-            let g:NERDTreeDirArrowCollapsible = '-'
-            let NERDTreeHijackNetrw=1
-            "let NERDTreeRespectWildIgnore=1
-            autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-        elseif plugin == 'nnn.vim'
-            " Show dotfiles
-            let g:nnn#command = 'nnn -H'
-
-        elseif plugin == 'nvim-colorizer.lua'
-            lua require'colorizer'.setup()
-
-        elseif plugin == 'vim-airline'
-            let g:airline#extensions#tabline#enabled = 1
-
-        elseif plugin == 'vim-json'
-            let g:vim_json_syntax_conceal = 0
-            let g:vim_json_syntax_concealcursor = 0
-
-        elseif plugin == 'vim-rainbow'
-            let g:rainbow_active = 1
-
-        endif
-    endfor
-
-    " netrw config
-        let g:netrw_home=$VIMTMP
-        "let g:netrw_banner=1 " Disable annoying banner
-        let g:netrw_browser_split=4 " Open in prior window
-        let g:netrw_altv=1 " Open splits to the right
-        let g:netrw_liststyle=3 " Tree view
-        let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+'
 
 
 " AUTO COMMANDS ===
