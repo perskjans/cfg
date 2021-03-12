@@ -14,3 +14,5 @@ exclude =
     .git,
     # There's no value in checking cache directories
     __pycache__
+    # There's no value in checking virtual environment directories
+    venv
