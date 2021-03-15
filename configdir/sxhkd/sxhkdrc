@@ -1,6 +1,4 @@
 
-super + b
-    chromium
 
 super + d
     dmenu_run -c -l 30
