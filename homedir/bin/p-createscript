@@ -3,5 +3,5 @@
 
 script=$HOME/bin/"$1"
 
-echo "#!/bin/sh\n# vim: set filetype=sh shiftwidth=2 :" > $script
+echo -e "#!/bin/sh\n# vim: set filetype=sh shiftwidth=2 :" > $script
 chmod +x $script

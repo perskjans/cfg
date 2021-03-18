@@ -1,0 +1,16 @@
+#!/bin/sh
+# vim: set filetype=sh shiftwidth=2 :
+
+
+options=$(echo -e "1. AltGr-Standard\n2. AltGr-Special\n3. AltGr-Workman\n" | dmenu -c -l 3 -i -p Do:)
+case "$options" in
+  *Standard) variant=altgr-intl-standard ;;
+  *Special) variant=altgr-intl-special ;;
+  *Workman) variant=altgr-intl-workman ;;
+esac
+
+if [ -n "$variant" ]; then
+  setxkbmap -model pc105 -layout custom -variant $variant
+fi
+
+#setxkbmap -option caps:ctrl_modifier  # change caps lock to ctrl

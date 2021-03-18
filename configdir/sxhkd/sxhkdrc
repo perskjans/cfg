@@ -4,22 +4,22 @@ super + d
     dmenu_run -c -l 30
 
 super + alt + m
-    p_dmenu_unicode
+    p-dmenu-unicode
 
 super + alt + t
-    p_toggletray
+    p-toggletray
 
 super + shift + q
-    p_dmenu_exit
+    p-dmenu-exit
 
 XF86AudioLowerVolume
-    p_audioctl down
+    p-audioctl down
 
 XF86AudioRaiseVolume
-    p_audioctl up
+    p-audioctl up
 
 XF86AudioMute
-    p_audioctl toggle
+    p-audioctl toggle
 
 XF86MonBrightnessDown
     xbacklight -dec 5

@@ -245,7 +245,7 @@ bind -x '"\C-l": clear;'
 
   alias xresources='. $HOME/.config/X11/xprofile'
 
-  alias tx='$HOME/bin/p_runtmux'
+  alias tx='$HOME/bin/p-runtmux'
 
   ## Git related aliases
     alias g='git'
@@ -272,23 +272,23 @@ bind -x '"\C-l": clear;'
     alias glg3="g log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''%s - %an' --all"
     alias glg4="g log --reverse --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''%s - %an' --all"
 
-    alias gcl='p_gitutils clone'
-    alias gfa='p_gitutils findall'
-    alias gpa='p_gitutils pullall'
-    alias gsa='p_gitutils submoduleadd'
-    alias gsi='p_gitutils submoduleinit'
-    alias gsd='p_gitutils submoduledeinit'
+    alias gcl='p-gitutils clone'
+    alias gfa='p-gitutils findall'
+    alias gpa='p-gitutils pullall'
+    alias gsa='p-gitutils submoduleadd'
+    alias gsi='p-gitutils submoduleinit'
+    alias gsd='p-gitutils submoduledeinit'
     alias gsl="(gcd; cat .gitmodules | grep submodule | cut -d'\"' -f2)"
     alias gslp="(gcd; git submodule status | cut -d' ' -f3)"
-    alias gsr='p_gitutils submodulerm'
+    alias gsr='p-gitutils submodulerm'
     alias gss='git submodule status'
-    alias gsu='p_gitutils submoduleupdate'
+    alias gsu='p-gitutils submoduleupdate'
 
     alias gdirset='export GIT_DIR=$HOME/.cfg.git/; export GIT_WORK_TREE=$HOME'
     alias gdirunset='unset GIT_DIR; unset GIT_WORK_TREE'
 
-    alias gsetupstream='p_gitutils setupstream'
-    alias gdeleteupstream='p_gitutils deleteupstream'
+    alias gsetupstream='p-gitutils setupstream'
+    alias gdeleteupstream='p-gitutils deleteupstream'
 
 ## PLATTFORM SPECIFIC
     DISTRO_TYPE=unknown
@@ -397,7 +397,7 @@ bind -x '"\C-l": clear;'
         local HOST="\[${userco}\]$(get_hostname)\[${TC_RESET}\]"
         local CWD="\[${TC_FG_YELLOW}\]$(pwd)\[${TC_RESET}\]"
         local CLNS="\[${TC_FG_BLUE}\]\n#$ \[${TC_RESET}\]"
-        local GITSTATUS="$(p_gitutils current_status)"
+        local GITSTATUS="$(p-gitutils current_status)"
         [ -n "$GITSTATUS" ] && GITSTATUS="${LBRACK}${GITSTATUS}${RBRACK}"
 
         export PS1=''

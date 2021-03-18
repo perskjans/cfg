@@ -2,12 +2,12 @@
 [ -f $XDG_CONFIG_HOME/xoverrides ] && xrdb -merge $XDG_CONFIG_HOME/xoverrides
 
 if [ -n "$p_kb" ]; then
-    setxkbmap -option caps:ctrl_modifier  # change caps lock to ctrl
-    setxkbmap -model pc105 -layout custom -variant workman-altgr-intl
+    setxkbmap -model pc105 -layout custom -variant altgr-intl-workman
 else
-    setxkbmap -option
-    setxkbmap -model pc105 -layout us -variant altgr-intl
+    setxkbmap -model pc105 -layout custom -variant altgr-intl-standard
 fi
 
+#setxkbmap -option caps:ctrl_modifier  # change caps lock to ctrl
+#setxkbmap -option
 #setxkbmap -model pc105 -layout custom,us -variant workman-altgr-intl,altgr-intl -option grp:shifts_toggle
 #setxkbmap -model pc105 -layout us,custom -variant altgr-intl,workman-altgr-intl -option grp:shifts_toggle

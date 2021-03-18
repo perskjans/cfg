@@ -15,7 +15,7 @@ export WINDOWMANAGER=${p_wm-spectrwm}
 
 
 # Run startup apps
-p_run_startup_apps
+p-run-startup-apps
 
 #
 # finally start the window manager
