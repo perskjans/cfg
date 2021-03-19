@@ -40,7 +40,7 @@ bind -x '"\C-l": clear;'
   fi
 
 ## HISTORY CONFIG
-  export HISTFILE="$HOME/.cache/bash/history"
+  export HISTFILE="$XDG_CACHE_HOME/bash/history"
 
   # don't put duplicate lines or lines starting with space in the history.
   HISTCONTROL=ignoreboth
@@ -148,7 +148,7 @@ bind -x '"\C-l": clear;'
   ## Misc
     [ $(command -v st) ] && export TERMINAL=st || export TERMINAL=xterm
     [ $(command -v nvim) ] && export EDITOR=nvim || export EDITOR=vim
-    [ "$EDITOR" = "vim" ] && export VIMINIT="source $XDG_CONFIG_HOME/nvim/init.vim"
+    #[ "$EDITOR" = "vim" ] && export VIMINIT="source $XDG_CONFIG_HOME/nvim/init.vim"
 
     export BROWSER=chromium
 
@@ -201,14 +201,13 @@ bind -x '"\C-l": clear;'
 
 ## ALIASES
 
-  alias e=vim
+  alias e=$EDITOR
   alias vi=$EDITOR
-  alias vim='vi'
   alias epipe="$EDITOR -c 'set ft=man nomod nolist' -"
-  alias vimpipe='epipe'
 
   alias ..='cd ..'
   alias ...='cd ../..'
+  alias ....='cd ../../..'
 
   # enable color support of ls and also add handy aliases
   if [ -x /usr/bin/dircolors ]; then
@@ -346,9 +345,9 @@ bind -x '"\C-l": clear;'
             alias pr='sudo zypper rm --clean-deps '
             alias pc='sudo zypper clean all '
             alias pu='sudo zypper up '
-            alias pq='zypper pa | grep "^i+" | vimpipe'
+            alias pq='zypper pa | grep "^i+" | epipe'
             alias pdu='sudo zypper dup '
-            alias pqr='zypper se | vimpipe'
+            alias pqr='zypper se | epipe'
             alias prd='sudo zypper rm --clean-deps $(sudo zypper | grep "^i" | cut -d"|" -f3)'
         ;;
 

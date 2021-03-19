@@ -1,12 +1,19 @@
 #!/bin/bash
 
+cfgroot=$(dirname $(realpath $0))
 editor=nvim
+plugindir=$XDG_DATA_HOME/nvim/site/pack/plugins/start
+
 if [[ "$1" != "" ]]; then
     editor=vim
+    plugindir=$HOME/.vim/pack/plugins/start
 fi
 
-cfgroot=$(dirname $(realpath $0))
-cd $cfgroot/configdir/nvim/pack/plugins/start
+echo $editor
+echo $plugindir
+
+mkdir -p $plugindir
+cd $plugindir
 
     #andviro/flake8-vim
     #easymotion/vim-easymotion
@@ -60,7 +67,7 @@ function getrepo()
         repo="https://github.com/$repo"
     fi
     if [ ! -d $name ]; then
-        p_gitutils clone "$repo --recursive"
+        p-gitutils clone "$repo --recursive"
 
         if [ $? ]; then
             cd "$name"

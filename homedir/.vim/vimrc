@@ -1,35 +1,66 @@
 scriptencoding utf-8
 
-if !has('nvim')
-    echo "This config is only for nvim" exit endif
+if v:version < 802
+    echo "This config is only for vim version >= 802!"
+    exit
 endif
 
+let $VIMDIR = $HOME . '/.vim'
+let $VIMTMP = $XDG_CACHE_HOME . '/vim'
+
+
+if !exists('$SUDO_USER')
+    silent execute "!mkdir -p " . shellescape(expand($VIMTMP)) . "/{swap,undo,backup,view}"
+endif
 
 if !exists('SCRATCHFILE')
-    let $SCRATCHFILE = $XDG_CACHE_HOME . "/nvim/scratch.txt"     " Scratchfile for tmp usage
+    let $SCRATCHFILE = $VIMTMP . "/scratch.txt"     " Scratchfile for tmp usage
 endif
 
 let g:tty = $TTY
-let g:myplugindir = $XDG_DATA_HOMEVIMDIR . "nvim/site/pack/plugins/start/"
+let g:myplugindir = $VIMDIR . "/pack/plugins/start/"
 
 
 " SETTINGS ===
     " Settings are ordered as in :options exept for 0 that is my own grouping.
 
     " 0 backup, view, undo, swap
-
         if exists('$SUDO_USER')        " don't create root-owned files
             set nobackup
             set nowritebackup
-            set shada=
-            set shadafile=NONE
+            set viminfo=
+            set viminfofile=NONE
         else
             set backup
             set undofile
             set backupskip=/tmp/*,/private/tmp/*"
+
+            set directory=$VIMTMP/swap//
+            set undodir=$VIMTMP/undo//
+            set backupdir=$VIMTMP/backup//
+            set viewdir=$VIMTMP/view//
+            set viminfofile=$VIMTMP/viminfo
+
+            "           +--Disable hlsearch while loading viminfo
+            "           | +--Remember marks for last 500 files
+            "           | |    +--Remember up to 10000 lines in each register
+            "           | |    |      +--Remember up to 1MB in each register
+            "           | |    |      |     +--Remember last 1000 search patterns
+            "           | |    |      |     |     +---Remember last 1000 commands
+            "           v v    v      v     v     v
+            set viminfo=h,'500,<10000,s1000,/1000,:1000
         endif
 
     " 1 important
+        filetype plugin indent on
+        "compatible     behave very Vi compatible (not advisable)
+            set nocp        " (default for nvim)
+        "cpoptions      list of flags to specify Vi compatibility
+        "   set cpo=aABceFs_
+        "insertmode    use Insert mode as the default mode
+            set noim
+        "paste          paste mode, insert typed text literally
+            set nopaste
         "pastetoggle    key sequence to toggle paste mode
             set pt=<F11>   " key sequence to toggle paste mode
 
@@ -43,7 +74,7 @@ let g:myplugindir = $XDG_DATA_HOMEVIMDIR . "nvim/site/pack/plugins/start/"
         "sections   nroff macro names that separate sections
         "   set sect=SHNHH\ HUnhsh
         "path   list of directory names used for file searching (global or local to buffer)
-            set pa^=.,**
+            set pa=.,**
         "cdpath list of directory names used for :cd
         "   set cd=,,
         "autochdir  change to directory of file in buffer
