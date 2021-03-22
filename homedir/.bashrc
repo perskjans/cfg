@@ -198,6 +198,8 @@ bind -x '"\C-l": clear;'
     export XSERVERRC="$XDG_CONFIG_HME/X11/xserverrc"
 
     export SQLITE_HISTORY=$XDG_DATA_HOME/sqlite_history
+    
+    export PYTHONPYCACHEPREFIX=$XDG_CACHE_HOME/pycache
 
 ## ALIASES
 
