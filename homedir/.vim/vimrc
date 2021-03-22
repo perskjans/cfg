@@ -19,7 +19,7 @@ endif
 
 let g:tty = $TTY
 let g:myplugindir = $VIMDIR . "/pack/plugins/start/"
-
+let g:myplugins = systemlist('ls ' . g:myplugindir)
 
 " SETTINGS ===
     " Settings are ordered as in :options exept for 0 that is my own grouping.
@@ -782,12 +782,6 @@ let g:myplugindir = $VIMDIR . "/pack/plugins/start/"
 
 
 " PLUGINS ==
-    " Load plugins
-    packloadall!
-
-    let g:myplugins = split(substitute(glob(g:myplugindir . '*'), g:myplugindir, '', 'g'))
-
-    " Plugin config
     for plugin in g:myplugins
         if plugin == 'flake8-vim'
             let g:PyFlakeOnWrite = 1
@@ -1283,7 +1277,7 @@ let g:myplugindir = $VIMDIR . "/pack/plugins/start/"
 
     augroup vim_reload_config
         au!
-        au BufWritePost init.vim so %
+        au BufWritePost $MYVIMRC so %
         augroup END
 
     augroup applications_reload_on_config_change
