@@ -1,7 +1,8 @@
 scriptencoding utf-8
 
 if !has('nvim')
-    echo "This config is only for nvim" exit endif
+    echo "This config is only for nvim"
+    exit
 endif
 
 
@@ -10,7 +11,8 @@ if !exists('SCRATCHFILE')
 endif
 
 let g:tty = $TTY
-let g:myplugindir = $XDG_DATA_HOMEVIMDIR . "nvim/site/pack/plugins/start/"
+let g:myplugindir = $XDG_DATA_HOME . "/nvim/site/pack/plugins/start/"
+let g:myplugins = systemlist('ls ' . g:myplugindir)
 
 
 " SETTINGS ===
@@ -751,12 +753,6 @@ let g:myplugindir = $XDG_DATA_HOMEVIMDIR . "nvim/site/pack/plugins/start/"
 
 
 " PLUGINS ==
-    " Load plugins
-    packloadall!
-
-    let g:myplugins = split(substitute(glob(g:myplugindir . '*'), g:myplugindir, '', 'g'))
-
-    " Plugin config
     for plugin in g:myplugins
         if plugin == 'flake8-vim'
             let g:PyFlakeOnWrite = 1
