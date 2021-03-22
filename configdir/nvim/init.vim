@@ -1248,7 +1248,7 @@ let g:myplugins = systemlist('ls ' . g:myplugindir)
 
     augroup vim_reload_config
         au!
-        au BufWritePost init.vim so %
+        au BufWritePost $MYVIMRC so %
         augroup END
 
     augroup applications_reload_on_config_change
