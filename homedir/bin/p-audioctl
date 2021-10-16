@@ -10,4 +10,4 @@ case ${1} in
   down) pulsemixer --change-volume -$delta ;;
 esac
 
-~/bin/p_statusbar_refresh
+~/bin/p-statusbar-refresh

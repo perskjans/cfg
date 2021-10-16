@@ -3,3 +3,4 @@ configdir/fontconfig/fonts.dir
 configdir/fontconfig/fonts.scale
 homedir/.dc++/
 homedir/.vim/pack/plugins/
+homedir/bin/thirdpartyapps/

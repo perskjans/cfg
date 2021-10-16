@@ -43,7 +43,7 @@ function make_links()
   local should_make_link=1
   if [ -e "$link_name" ] || [ -L "$link_name" ]; then
     echo -e "\nFile exist: $(stat -c '%F %N' $link_name)"
-    read  -p "Replace? y/n: " answer
+    read  -p -r "Replace? y/n: " answer
 
     case $answer in
       y) ${do_sudo}rm -rf $link_name;;

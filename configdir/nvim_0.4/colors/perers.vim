@@ -74,11 +74,9 @@
 "hi clear
 set t_Co=256
 set background=dark
-syntax enable
-
-hi LspReferenceRead  cterm=NONE   ctermfg=232     ctermbg=100    guifg=#080808   guibg=#878700
-hi LspReferenceText  cterm=NONE   ctermfg=232     ctermbg=100    guifg=#080808   guibg=#878700
-hi LspReferenceWrite cterm=NONE   ctermfg=232     ctermbg=100    guifg=#080808   guibg=#878700
+if exists("syntax_on")
+  syntax reset
+endif
 
 hi Boolean          cterm=NONE    ctermfg=135     ctermbg=NONE   guifg=#af5fff   guibg=NONE
 hi Character        cterm=NONE    ctermfg=90      ctermbg=NONE   guifg=#870087   guibg=NONE
@@ -105,7 +103,7 @@ hi Folded           cterm=NONE    ctermfg=67      ctermbg=16     guifg=#5f87af  
 hi Function         cterm=NONE    ctermfg=208     ctermbg=NONE   guifg=#ff8700   guibg=NONE
 hi Identifier       cterm=NONE    ctermfg=208     ctermbg=NONE   guifg=#ff8700   guibg=NONE
 hi Ignore           cterm=NONE    ctermfg=244     ctermbg=232    guifg=#808080   guibg=#080808
-hi IncSearch        cterm=NONE    ctermfg=16      ctermbg=193    guifg=#ffff00   guibg=#000000
+hi IncSearch        cterm=NONE    ctermfg=16      ctermbg=193    guifg=#d7ffaf   guibg=#000000
 hi keyword          cterm=NONE    ctermfg=20      ctermbg=NONE   guifg=#0000df   guibg=NONE
 hi Label            cterm=NONE    ctermfg=229     ctermbg=NONE   guifg=#ffffaf   guibg=NONE
 hi LineNr           cterm=NONE    ctermfg=250     ctermbg=NONE   guifg=#bcbcbc   guibg=NONE
@@ -117,7 +115,7 @@ hi NonText          cterm=NONE    ctermfg=59      ctermbg=NONE   guifg=#005f87  
 hi Normal           cterm=NONE    ctermfg=130     ctermbg=16     guifg=#af5f00   guibg=#000000
 hi Number           cterm=NONE    ctermfg=135     ctermbg=NONE   guifg=#af5fff   guibg=NONE
 hi Operator         cterm=NONE    ctermfg=161     ctermbg=NONE   guifg=#d7005f   guibg=NONE
-hi Pmenu            cterm=NONE    ctermfg=81      ctermbg=16     guifg=#ffd7ff   guibg=#00005f
+hi Pmenu            cterm=NONE    ctermfg=81      ctermbg=16     guifg=#5fd7ff   guibg=#000000
 hi PmenuSbar        cterm=NONE    ctermfg=NONE    ctermbg=232    guifg=NONE      guibg=#080808
 hi PmenuSel         cterm=NONE    ctermfg=255     ctermbg=242    guifg=#eeeeee   guibg=#666666
 hi PmenuThumb       cterm=NONE    ctermfg=81      ctermbg=NONE   guifg=#5fd7ff   guibg=NONE
@@ -125,7 +123,7 @@ hi PreCondit        cterm=NONE    ctermfg=118     ctermbg=NONE   guifg=#87ff00  
 hi PreProc          cterm=NONE    ctermfg=89      ctermbg=NONE   guifg=#87005f   guibg=NONE
 hi Question         cterm=NONE    ctermfg=81      ctermbg=NONE   guifg=#5fd7ff   guibg=NONE
 hi Repeat           cterm=NONE    ctermfg=161     ctermbg=NONE   guifg=#d7005f   guibg=NONE
-hi Search           cterm=NONE    ctermfg=16      ctermbg=193    guifg=#000000   guibg=#005fff
+hi Search           cterm=NONE    ctermfg=16      ctermbg=193    guifg=#000000   guibg=#d7ffaf
 hi SignColumn       cterm=NONE    ctermfg=118     ctermbg=235    guifg=#87ff00   guibg=#262626
 hi SpecialChar      cterm=NONE    ctermfg=161     ctermbg=NONE   guifg=#d7005f   guibg=NONE
 hi SpecialComment   cterm=NONE    ctermfg=245     ctermbg=NONE   guifg=#8a8a8a   guibg=NONE
@@ -133,7 +131,7 @@ hi Special          cterm=NONE    ctermfg=74      ctermbg=NONE   guifg=#5fafd7  
 hi Statement        cterm=NONE    ctermfg=3       ctermbg=NONE   guifg=#808000   guibg=NONE
 hi SpecialKey       cterm=NONE    ctermfg=81      ctermbg=NONE   guifg=#5fd7ff   guibg=NONE
 hi StorageClass     cterm=NONE    ctermfg=208     ctermbg=NONE   guifg=#ff8700   guibg=NONE
-hi String           cterm=NONE    ctermfg=34      ctermbg=NONE   guifg=#005f00   guibg=NONE
+hi String           cterm=NONE    ctermfg=34      ctermbg=NONE   guifg=#00af00   guibg=NONE
 hi Structure        cterm=NONE    ctermfg=63      ctermbg=NONE   guifg=#5f5fff   guibg=NONE
 hi Tag              cterm=NONE    ctermfg=161     ctermbg=NONE   guifg=#d7005f   guibg=NONE
 hi Title            cterm=NONE    ctermfg=190     ctermbg=NONE   guifg=#d7ff00   guibg=NONE

@@ -7,6 +7,18 @@
     endfunction
 
 
+" Toggle foldmethod
+    function! perers#functions#toggle_fold()
+        if g:FoldMethod == 0
+            exe 'set foldmethod=indent'
+            let g:FoldMethod = 1
+        else
+            exe 'set foldmethod=marker'
+            let g:FoldMethod = 0
+        endif
+    endfunction
+
+
 " Cycle through relativenumber + number, number (only), and no numbering.
     function! perers#functions#cycle_numbering() abort
         if exists('+relativenumber')
@@ -31,7 +43,7 @@
     function! perers#functions#toggle_quickfix_list()
         if exists("g:qfix_list")
             cclose
-            let g:qfix_list = 0
+            unlet g:qfix_list
         else
             let g:qfix_list = 1
             copen

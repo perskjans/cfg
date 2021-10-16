@@ -147,8 +147,11 @@ bind -x '"\C-l": clear;'
 
   ## Misc
     [ $(command -v st) ] && export TERMINAL=st || export TERMINAL=xterm
-    [ $(command -v nvim) ] && export EDITOR=nvim || export EDITOR=vim
-    #[ "$EDITOR" = "vim" ] && export VIMINIT="source $XDG_CONFIG_HOME/nvim/init.vim"
+    export EDITOR=vim
+    if [ $(command -v nvim) ]; then
+      export EDITOR=nvim 
+      export MANPAGER="nvim -c 'set ft=man' -"
+    fi
 
     export BROWSER=chromium
 
@@ -223,16 +226,6 @@ bind -x '"\C-l": clear;'
   fi
 
   alias sx="startx $XDG_CONFIG_HOME/X11/xinitrc"
-
-  # Use Vim to read man pages
-  vimman() {
-    if [ $# -eq 0 ]; then
-      /usr/bin/man
-    elif whatis $* ; then
-      /usr/bin/man $* | col -b | $EDITOR -c 'set ft=man nomod nolist' -
-    fi
-  }
-  alias man='vimman'
 
   alias n='nnn -H'
 

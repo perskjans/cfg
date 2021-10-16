@@ -12,3 +12,6 @@ do
   [ -d "$homedir/$dir" ] && run_cmd "rm -rf $homedir/$dir"
 done
 
+
+
+

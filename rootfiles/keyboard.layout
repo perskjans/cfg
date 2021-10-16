@@ -24,7 +24,7 @@ xkb_symbols "altgr-intl-standard" {
     key <AD05> {    [ t,             T,                thorn,                 THORN                ]    };
     key <AD06> {    [ y,             Y,                udiaeresis,            Udiaeresis           ]    };
     key <AD07> {    [ u,             U,                uacute,                Uacute               ]    };
-    key <AD08> {    [ i,             I,                Iacute,                Iacute               ]    };
+    key <AD08> {    [ i,             I,                iacute,                Iacute               ]    };
     key <AD09> {    [ o,             O,                oacute,                Oacute               ]    };
     key <AD10> {    [ p,             P,                odiaeresis,            Odiaeresis           ]    };
     key <AD11> {    [ bracketleft,   braceleft,        guillemotleft,         leftdoublequotemark  ]    };

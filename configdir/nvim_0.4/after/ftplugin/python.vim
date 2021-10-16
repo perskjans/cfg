@@ -1,16 +1,20 @@
-setlocal shiftwidth=4
-setlocal tabstop=4
-setlocal softtabstop=4
-setlocal expandtab
-setlocal autoindent
-setlocal smartindent
-setlocal colorcolumn=89
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
+set expandtab
+set autoindent
+set smartindent
 
 setlocal path=.,**
-setlocal wildignore+=*.pyc
+setlocal wildignore=*.pyc
+
+if index(g:myplugins, 'ale') >= 0
+  nnoremap <buffer> <silent> Ä :ALEPreviousWrap<cr>
+  nnoremap <buffer> <silent> Ö :ALENextWrap<cr>
+endif
 
 " pattern for include-search
-setlocal include=^\\s*\\(from\\\|import\\)\\s*\\zs\\(\\S\\+\\s\\{-}\\)*\\ze\\($\\\|\as\\)
+set include=^\\s*\\(from\\\|import\\)\\s*\\zs\\(\\S\\+\\s\\{-}\\)*\\ze\\($\\\|\as\\)
 
 " Set define jump expression
 setlocal define=^\\s*\\<\\(def\\\|class\\)\\>
