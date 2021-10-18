@@ -189,7 +189,7 @@ vim.opt.autoread = true                              -- automatically read a fil
 --}}}
 
 -- 20 command line editing {{{
-vim.opt.wildmode = 'list:longest,full'                   -- specifies how command line completion works
+vim.opt.wildmode = 'longest,full'
 vim.opt.wildignore = ''                                  -- list of patterns to ignore files for file name completion
                 .. '/tmp/*,*.bak,*.so,*.swp,*.zip,'      -- MacOSX/Linux
                 .. '*\\tmp\\*,'                          -- Windows
@@ -332,7 +332,7 @@ end)
 --==============================================================================
 
 --==============================================================================
--- KEY MAPPINGS {{{
+-- KEY MAPPINGS {{
 local mapkey = vim.api.nvim_set_keymap
 local noremap_silent = { noremap = true, silent = true }
 local noremap = { noremap = true }
@@ -403,11 +403,16 @@ mapkey('n', '<localleader>z', ':e' .. PERERS_CACHE_DIR .. '/scratch.txt<CR>', no
 -- NORMAL MODE {{{
 -- Save and quit
 mapkey('n', '®', ':w<CR>', noremap_silent)
+mapkey('n', '!®', ':w!<CR>', noremap_silent)
 mapkey('n', 'ú', ':q<CR>', noremap_silent)
+mapkey('n', '!ú', ':q!<CR>', noremap_silent)
 mapkey('n', '«', ':x<CR>', noremap_silent)
+mapkey('n', '!«', ':x!<CR>', noremap_silent)
 
 -- Close current buffer
 mapkey('n', 'ß', ':bn<CR>:bd#<CR>', noremap)
+mapkey('n', '!ß', ':bn<CR>:bd!#<CR>', noremap)
+
 
 -- Scroll
 mapkey('n', '<C-e>', '<C-e>', noremap_silent)
@@ -438,9 +443,6 @@ mapkey('n', 'Q', 'gq', noremap_silent)
 
 -- Open $MYVIMRC
 mapkey('n', '<F3>', ':e $MYVIMRC<CR>',noremap_silent)
-
--- open cmd find
-mapkey('n', 'Ó', ':find ', noremap)
 
 -- Show open buffers
 mapkey('n', '<F4>', ':buffers<CR>:b', noremap)
@@ -575,20 +577,23 @@ for _, plugin in pairs(available_plugins) do
         local cmp = require('cmp')
         cmp.setup({
             mapping = {
-
+                ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+                ['<C-e>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+                ['<C-p>'] = cmp.mapping.close(),
+                ['<C-y>'] = cmp.mapping.abort(),
             },
             sources = {
                 { name = 'nvim_lsp' },
                 { name = 'omni' },
                 { name = 'buffer' },
                 { name = 'spell' },
-            }
+            },
         })
     end -- }}}
 
     -- nvim-dap {{{
     if plugin == "nvim-dap" then
-        require('perers.dbg')
+        require('perers.dap')
     end -- }}}
 
     -- glow.nvim {{{

@@ -117,7 +117,7 @@ hi NonText          cterm=NONE    ctermfg=59      ctermbg=NONE   guifg=#005f87  
 hi Normal           cterm=NONE    ctermfg=130     ctermbg=16     guifg=#af5f00   guibg=#000000
 hi Number           cterm=NONE    ctermfg=135     ctermbg=NONE   guifg=#af5fff   guibg=NONE
 hi Operator         cterm=NONE    ctermfg=161     ctermbg=NONE   guifg=#d7005f   guibg=NONE
-hi Pmenu            cterm=NONE    ctermfg=81      ctermbg=16     guifg=#ffd7ff   guibg=#00005f
+hi Pmenu            cterm=NONE    ctermfg=81      ctermbg=16     guifg=#ffd7ff   guibg=#121212
 hi PmenuSbar        cterm=NONE    ctermfg=NONE    ctermbg=232    guifg=NONE      guibg=#080808
 hi PmenuSel         cterm=NONE    ctermfg=255     ctermbg=242    guifg=#eeeeee   guibg=#666666
 hi PmenuThumb       cterm=NONE    ctermfg=81      ctermbg=NONE   guifg=#5fd7ff   guibg=NONE
@@ -143,7 +143,7 @@ hi Typedef          cterm=NONE    ctermfg=226     ctermbg=NONE   guifg=#ffff00  
 hi Underlined       cterm=NONE    ctermfg=244     ctermbg=NONE   guifg=#808080   guibg=NONE
 hi WarningMsg       cterm=NONE    ctermfg=255     ctermbg=238    guifg=#eeeeee   guibg=#444444
 hi VertSplit        cterm=NONE    ctermfg=52      ctermbg=NONE   guifg=#5f0000   guibg=NONE
-hi WildMenu         cterm=NONE    ctermfg=81      ctermbg=16     guifg=#5fd7ff   guibg=#000000
+hi WildMenu         cterm=NONE    ctermfg=81      ctermbg=16     guifg=#5fd7ff   guibg=#121212
 hi Visual           cterm=NONE    ctermfg=NONE    ctermbg=236    guifg=NONE      guibg=#303030
 hi VisualNOS        cterm=NONE    ctermfg=NONE    ctermbg=236    guifg=NONE      guibg=#303030
 

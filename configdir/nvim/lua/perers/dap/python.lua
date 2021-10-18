@@ -1,4 +1,5 @@
-require('dap-python').setup()
+--require('dap-python').setup()
+require('dap-python').setup("python3")
 require('dap-python').test_runner = 'pytest'
 
 local mapkey = vim.api.nvim_set_keymap

@@ -1,4 +1,5 @@
 configdir/nvim/pack/plugins/
+configdir/nvim/plugin/packer_compiled.lua
 configdir/fontconfig/fonts.dir
 configdir/fontconfig/fonts.scale
 homedir/.dc++/
