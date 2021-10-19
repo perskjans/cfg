@@ -3,7 +3,7 @@
 -- Example configuations here: https://github.com/mattn/efm-langserver
 -- python
 local flake8 = {
-    LintCommand = "flake8 --ignore=E501 --stdin-display-name ${INPUT} -",
+    LintCommand = "flake8 --stdin-display-name ${INPUT} -",
     lintStdin = true,
     lintFormats = {"%f:%l:%c: %m"}
 }
@@ -74,7 +74,7 @@ nvim_lsp["efm"].setup  {
             html = {prettier},
             css = {prettier},
             json = {prettier},
-            --yaml = {prettier_yaml},
+            yaml = {prettier_yaml},
             --markdown = {markdownPandocFormat, markdownlint},
         }
     }

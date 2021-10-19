@@ -357,6 +357,8 @@ mapkey('n', '<leader>fb', ':Telescope buffers<CR>', noremap_silent)
 mapkey('n', '<leader>fe', ':Telescope file_browser<CR>', noremap_silent)
 mapkey('n', '<leader>ff', ':Telescope find_files<CR>', noremap_silent)
 mapkey('n', '<leader>fh', ':Telescope help_tags<CR>', noremap_silent)
+mapkey('n', '<leader>fl', ':Telescope live_grep<CR>', noremap_silent)
+mapkey('n', '<leader>fs', ':Telescope grep_string<CR>', noremap_silent)
 mapkey('n', '<leader>ft', ':Telescope treesitter<CR>', noremap_silent)
 mapkey('n', '<leader>fgg', ':Telescope git_files<CR>', noremap_silent)
 mapkey('n', '<leader>fgb', ':lua require("perers.utils").git_branches()<CR>', noremap_silent)
@@ -446,6 +448,9 @@ mapkey('n', '<F3>', ':e $MYVIMRC<CR>',noremap_silent)
 
 -- Show open buffers
 mapkey('n', '<F4>', ':buffers<CR>:b', noremap)
+
+-- Reload file
+mapkey('n', '<F5>', ':e<CR>', noremap)
 
 -- Visual Block mode is far more useful that Visual mode (so swap the commands).
 mapkey('n', 'v', '<C-v>', noremap_silent)
@@ -631,6 +636,17 @@ for _, plugin in pairs(available_plugins) do
 
         require('telescope').load_extension('fzy_native')
     end -- }}}
+
+    -- nvim-treesitter {{{
+    if plugin == "nvim-treesitter" then
+        require'nvim-treesitter.configs'.setup {
+            highlight = {
+                enable = true,
+                additional_vim_regex_highlighting = false,
+            },
+        }
+    end -- }}}
+
 end
 
 --}}}
@@ -744,5 +760,3 @@ vim.api.nvim_exec(
 
 --}}}
 --==============================================================================
-
--- vim: foldmethod=marker foldlevelstart=1

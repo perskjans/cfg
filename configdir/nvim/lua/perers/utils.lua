@@ -20,6 +20,7 @@ end
 
 function utils.reload_config()
     for module_name, _  in pairs(package.loaded) do
+        --print(module_name)
         if string.find(module_name, '^perers') then
            package.loaded[module_name] = nil
         end
