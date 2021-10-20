@@ -8,6 +8,7 @@ PERERS_CONFIG_DIR =  vim.fn.stdpath('config')
 PERERS_DATA_DIR  =  vim.fn.stdpath('data')
 PERERS_PLUGIN_DIRECTORY = string.format('%s/site/pack/packer/start/', PERERS_DATA_DIR)
 PERERS_LOCAL_BIN = vim.env.XDG_DATA_HOME .. '/../bin'
+PERERS_LSP_DIR  =  vim.fn.stdpath('data') .. '/lspinstall'
 
 -- Map leader keys before loading plugins and setting key mappings
 vim.g.mapleader = ' '
@@ -33,16 +34,17 @@ end
 
 -- 0 backup, view, undo, swap {{{
 if vim.env.USER == 'root' then
-  vim.opt.backup = false
   vim.opt.shada = 'NONE'
   vim.opt.swapfile = false
   vim.opt.undofile = false
-  vim.opt.writebackup = false
 else
+  vim.opt.backup = true
   vim.opt.swapfile = true
   vim.opt.undofile = true
-  vim.opt.writebackup = true
 end
+
+vim.opt.backup = false
+vim.opt.writebackup = false
 --}}}
 
 -- 1 important {{{
@@ -332,7 +334,7 @@ end)
 --==============================================================================
 
 --==============================================================================
--- KEY MAPPINGS {{
+-- KEY MAPPINGS {{{
 local mapkey = vim.api.nvim_set_keymap
 local noremap_silent = { noremap = true, silent = true }
 local noremap = { noremap = true }
@@ -472,12 +474,11 @@ mapkey('n', 'S', 'i<cr><esc>^mzgk:silent! s/\v +$//<cr>:noh<cr>`z', noremap_sile
 mapkey('n', 'gK', 'K', noremap)
 
 -- Resize window
-mapkey('n', '¹', ':vertical resize +2<CR>', noremap)
-mapkey('n', '¹', ':vertical resize +2<CR>', noremap_silent)
-mapkey('n', '²', ':vertical resize -2<CR>', noremap_silent)
-mapkey('n', '³', ':resize +2<CR>', noremap_silent)
-mapkey('n', '¤', ':resize -2<CR>', noremap_silent)
-mapkey('n', '€', ':wincmd = <CR>', noremap_silent)
+mapkey('n', '<M-1>', ':vertical resize +2<CR>', noremap_silent)
+mapkey('n', '<M-2>', ':vertical resize -2<CR>', noremap_silent)
+mapkey('n', '<M-3>', ':resize +2<CR>', noremap_silent)
+mapkey('n', '<M-4>', ':resize -2<CR>', noremap_silent)
+mapkey('n', '<M-5>', ':wincmd = <CR>', noremap_silent)
 
 -- Select the entire file...
 mapkey('n', 'vaa', 'VGo1G', noremap_silent)
@@ -663,7 +664,7 @@ local function setup_servers()
   require'lspinstall'.setup()
   local options = require('perers.language_servers.common_config')
   local nvim_lsp = require('lspconfig')
-  local servers = require'lspinstall'.installed_servers()
+  local servers = vim.fn.systemlist('ls ' .. PERERS_LSP_DIR)
 
   for _, server in pairs(servers) do
       module = 'perers.language_servers.' .. server
