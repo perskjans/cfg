@@ -87,7 +87,7 @@ xkb_symbols "altgr-intl-special" {
     key <AD01> {    [ q,             Q,                uacute,                Uacute               ]    };
     key <AD02> {    [ w,             W,                eth,                   ETH                  ]    };
     key <AD03> {    [ e,             E,                Up,                    Page_Up              ]    };
-    key <AD04> {    [ r,             R,                asciicircum,           registered           ]    };
+    key <AD04> {    [ r,             R,                registered,            registered           ]    };
     key <AD05> {    [ t,             T,                ssharp,                section              ]    };
     key <AD06> {    [ y,             Y,                udiaeresis,            Udiaeresis           ]    };
     key <AD07> {    [ u,             U,                aring,                 Aring                ]    };
