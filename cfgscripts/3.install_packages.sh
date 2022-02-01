@@ -2,6 +2,8 @@
 # This file is sourced by run_cfgscripts
 # vim: set shiftwidth=2 filetype=sh :
 
+distrofiles=$(dirname $(dirname $(realpath $0)))/distro_specific_files
+
 [ -f /etc/arch-release ] && DISTRO_TYPE=arch
 [ -f /etc/redhat-release ] && DISTRO_TYPE=redhat
 [ $(command -v apt) ] && DISTRO_TYPE=debian
@@ -92,9 +94,10 @@ suse)
     readline-devel
     sxhkd \
     sysstat \
+    tint2conf \
     tmux \
     transmission-cli \
-    trayer \
+    trayer-srg \
     unclutter \
     unzip \
     virt-manager \
@@ -103,6 +106,8 @@ suse)
     xorg-x11-devel \
     xterm \
     "
+
+  sudo zypper ar $distrofiles/opensuse.repo 2>/dev/null
   sudo zypper install $packages
 esac
 

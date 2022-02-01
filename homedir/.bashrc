@@ -149,8 +149,8 @@ bind -x '"\C-l": clear;'
     [ $(command -v st) ] && export TERMINAL=st || export TERMINAL=xterm
     export EDITOR=vim
     if [ $(command -v nvim) ]; then
-      export EDITOR=nvim 
-      export MANPAGER="nvim -c 'set ft=man' -"
+      export EDITOR=nvim
+      export MANPAGER="nvim -c 'set ft=man nomod nolist' -"
     fi
 
     export BROWSER=chromium
@@ -201,7 +201,7 @@ bind -x '"\C-l": clear;'
     export XSERVERRC="$XDG_CONFIG_HME/X11/xserverrc"
 
     export SQLITE_HISTORY=$XDG_DATA_HOME/sqlite_history
-    
+
     export PYTHONPYCACHEPREFIX=$XDG_CACHE_HOME/pycache
 
 ## ALIASES
@@ -209,6 +209,16 @@ bind -x '"\C-l": clear;'
   alias e=$EDITOR
   alias vi=$EDITOR
   alias epipe="$EDITOR -c 'set ft=man nomod nolist' -"
+
+  # Use Vim to read man pages
+  vman() {
+      if [ $# -eq 0 ]; then
+          /usr/bin/man
+      elif whatis $* ; then
+          /usr/bin/man $* | col -b | e -c 'set ft=man nomod nolist' -
+      fi
+  }
+  alias man='vman'
 
   alias ..='cd ..'
   alias ...='cd ../..'
