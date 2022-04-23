@@ -2,7 +2,7 @@
 # This file is sourced by run_cfgscripts
 # vim: set shiftwidth=2 filetype=sh :
 
-distrofiles=$(dirname $(dirname $(realpath $0)))/distro_specific_files
+distrofiles=$(dirname $(dirname $(readlink $0)))/distro_specific_files
 
 [ -f /etc/arch-release ] && DISTRO_TYPE=arch
 [ -f /etc/redhat-release ] && DISTRO_TYPE=redhat
@@ -68,8 +68,19 @@ arch)
 ;;
 
 suse)
+
+  sudo zypper install opi
+
+  opi dunst
+  opi neovim
+  opi trayer
+  opi tint2conf
+  opi pulsemixer
+  opi transmission
+  opi volumeicon
+
   packages="\
-    alsa\
+    alsa \
     arandr \
     automake \
     bash \
@@ -78,36 +89,32 @@ suse)
     dunst \
     fossil \
     gcc \
+    kitty \
     libnotify \
     libvirt \
     make \
     mpv \
-    neovim \
     openssh \
     openssl \
     papirus-icon-theme \
     patch \
     pavucontrol \
     pulseaudio \
-    pulsemixer \
-    qemu \
     readline-devel
     sxhkd \
     sysstat \
-    tint2conf \
     tmux \
-    transmission-cli \
-    trayer-srg \
     unclutter \
     unzip \
-    virt-manager \
-    volumeicon \
     wget \
     xorg-x11-devel \
-    xterm \
     "
+
+    # qemu \
+    # virt-manager \
 
   sudo zypper ar $distrofiles/opensuse.repo 2>/dev/null
   sudo zypper install $packages
+
 esac
 

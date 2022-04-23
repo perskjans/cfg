@@ -1,4 +1,9 @@
 
+super + Return
+    $TERMINAL
+
+super + r
+    dmenu_run -c -l 30
 
 super + d
     dmenu_run -c -l 30

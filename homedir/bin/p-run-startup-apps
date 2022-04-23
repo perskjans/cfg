@@ -1,7 +1,5 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # vim: set filetype=sh shiftwidth=2 :
-
-setxkbmap -model pc105 -layout custom -variant altgr-intl-standard
 
 for cmd in \
   'dunst' \
@@ -10,10 +8,9 @@ for cmd in \
   'unclutter -idle 1' \
   'volumeicon'
 do
-  set $cmd
-  app=$1
+  app=${cmd%%\ *}
   if [ ! $(which $app >/dev/null 2>&1) ]; then
-    echo pkill $app >/dev/null 2>&1; echo $cmd
+    echo $cmd
     pkill $app >/dev/null 2>&1; $cmd &
   fi
 done

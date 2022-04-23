@@ -3,13 +3,14 @@
 # This script is called from 'startx' when you start an X session
 #
 
-export WINDOWMANAGER=${WINDOWMANAGER-spectrwm}
+export WINDOWMANAGER=${spectrwm}
 
 
 
 [ -f /etc/xprofile ] && . /etc/xprofile
 [ -f $XDG_CONFIG_HOME/X11/xprofile ] && . $XDG_CONFIG_HOME/X11/xprofile
 
+p-run-startup-apps
 
 unset WINDOW_MANAGER STARTUP
 exec $WINDOWMANAGER ${1+"$@"}

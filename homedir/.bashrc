@@ -146,7 +146,8 @@ bind -x '"\C-l": clear;'
     mkdir -p -m 700 $XDG_RUNTIME_DIR
 
   ## Misc
-    [ $(command -v st) ] && export TERMINAL=st || export TERMINAL=xterm
+    #[ $(command -v st) ] && export TERMINAL=st || export TERMINAL=kitty
+    export TERMINAL=kitty
     export EDITOR=vim
     if [ $(command -v nvim) ]; then
       export EDITOR=nvim
