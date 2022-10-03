@@ -4,7 +4,7 @@ setxkbmap -model pc105 -layout custom -variant altgr-intl-standard
 [ -f $XDG_CONFIG_HOME/X11/xresources ] && xrdb -merge $XDG_CONFIG_HOME/X11/xresources
 [ -f $XDG_CONFIG_HOME/xoverrides ] && xrdb -merge $XDG_CONFIG_HOME/xoverrides
 
-if [ $(xrandr | grep primary | grep 3840) -ne 0 ]; then
-    export GDK_DPI_SCALE=1.75
-    export QT_SCALE_FACTOR=2
-fi
+#if [ $(xrandr | grep primary | grep 3840) -ne 0 ]; then
+#    export GDK_DPI_SCALE=1.75
+#    export QT_SCALE_FACTOR=2
+#fi

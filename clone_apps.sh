@@ -19,7 +19,7 @@ do
     fi
     cd $dest
     if [ ! -d $name ]; then
-        p_gitutils clone "$repo --recursive"
+        p-gitutils clone "$repo --recursive"
         echo
     fi
 done

@@ -2,7 +2,9 @@
 # This file is sourced by run_cfgscripts
 # vim: set shiftwidth=2 filetype=sh :
 
-distrofiles=$(dirname $(dirname $(readlink $0)))/distro_specific_files
+INSTALL_X_PACKAGES=${1:-0}
+
+distrofiles=$(dirname $(dirname $(realpath $0)))/distro_specific_files
 
 [ -f /etc/arch-release ] && DISTRO_TYPE=arch
 [ -f /etc/redhat-release ] && DISTRO_TYPE=redhat
@@ -69,52 +71,66 @@ arch)
 
 suse)
 
-  sudo zypper install opi
+  #sudo zypper install opi
 
-  opi dunst
-  opi neovim
-  opi trayer
-  opi tint2conf
-  opi pulsemixer
-  opi transmission
-  opi volumeicon
+  # opi dunst
+  # opi neovim
+  # opi trayer
+  # opi tint2conf
+  # opi pulsemixer
+  # opi transmission
+  # opi volumeicon
 
-  packages="\
-    alsa \
-    arandr \
-    automake \
-    bash \
-    bash-completion \
-    diffutils \
-    dunst \
-    fossil \
-    gcc \
-    kitty \
-    libnotify \
-    libvirt \
-    make \
-    mpv \
-    openssh \
-    openssl \
-    papirus-icon-theme \
-    patch \
-    pavucontrol \
-    pulseaudio \
-    readline-devel
-    sxhkd \
-    sysstat \
-    tmux \
-    unclutter \
-    unzip \
-    wget \
-    xorg-x11-devel \
-    "
+  server_packages=(
+    bash
+    bash-completion
+    neovim
+    openssh
+    openssl
+    sysstat
+    tmux
+    unzip
+    wget
+  )
+
+  dev_packages=(
+    automake
+    #clang
+    diffutils
+    fossil
+    gcc
+    gdb
+    git
+    make
+    patch
+    readline-dev
+    xorg-x11-devel
+  )
+
+  x_packages=(
+    alsa
+    arandr
+    codecs
+    dunst
+    kitty
+    libnotify
+    libvirt
+    mpv
+    papirus-icon-theme
+    pavucontrol
+    pulseaudio
+    sxhkd
+    unclutter
+    virt-manager
+    xorg-x11-server
+  )
 
     # qemu \
-    # virt-manager \
 
-  sudo zypper ar $distrofiles/opensuse.repo 2>/dev/null
-  sudo zypper install $packages
-
+  sudo zypper ar $distrofiles/opensuse.repo
+  sudo zypper install "${server_packages[@]}" "${dev_packages[@]}"
+  if [[ $INSTALL_X_PACKAGES -ne 0 ]]; then
+    sudo zypper install "${x_packages[@]}"
+  fi
 esac
 

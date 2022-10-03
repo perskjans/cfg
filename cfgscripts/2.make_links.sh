@@ -18,7 +18,7 @@ done
 ### root files ###
 
 # link keyboard layout
-make_links "$cfgroot/rootfiles/keyboard.layout" "/usr/share/X11/xkb/symbols/custom" 1
+#make_links "$cfgroot/rootfiles/keyboard.layout" "/usr/share/X11/xkb/symbols/custom" 1
 
 #sudo cp $HOME/cfg/rootfiles/*.desktop /usr/share/applications/
 

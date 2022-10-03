@@ -45,9 +45,9 @@ let g:myplugins = systemlist('ls ' . g:myplugindir)
 
         Plug 'vim-scripts/AutoComplPop'
 
-        Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
-            let g:Hexokinase_highlighters = ['backgroundfull']
-            let g:Hexokinase_optInPatterns = 'full_hex,triple_hex,rgb,rgba,hsl,hsla,colour_names'
+        "Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+        "    let g:Hexokinase_highlighters = ['backgroundfull']
+        "    let g:Hexokinase_optInPatterns = 'full_hex,triple_hex,rgb,rgba,hsl,hsla,colour_names'
 
         "Plug 'lilydjwg/colorizer'
 

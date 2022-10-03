@@ -246,7 +246,8 @@ require('packer').startup(function(use)
     -- use {'norcalli/nvim_utils'}
 
     -- LSP
-    use {"kabouzeid/nvim-lspinstall"}
+    use { "williamboman/mason.nvim" }
+    --use {"kabouzeid/nvim-lspinstall"}
     use {'neovim/nvim-lspconfig'}
     use {'glepnir/lspsaga.nvim'}
     -- use {'onsails/lspkind-nvim'}
@@ -655,13 +656,13 @@ end
 
 --==============================================================================
 -- LANGUAGE SERVERS {{{
+require("mason").setup()
 
 local function setup_servers()
   local function requiref(module)
       require(module)
   end
 
-  require'lspinstall'.setup()
   local options = require('perers.language_servers.common_config')
   local nvim_lsp = require('lspconfig')
   local servers = vim.fn.systemlist('ls ' .. PERERS_LSP_DIR)
@@ -673,12 +674,6 @@ local function setup_servers()
           nvim_lsp[server].setup { on_attach = options.common_on_attach }
       end
   end
-end
-
--- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-require'lspinstall'.post_install_hook = function ()
-  setup_servers() -- reload installed servers
-  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
 end
 
 setup_servers()
