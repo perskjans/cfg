@@ -3,7 +3,8 @@
 local options = require('perers.language_servers.common_config')
 
 -- set the path to the sumneko installation; if you previously installed via the now deprecated :LspInstall, use
-local binary_path = PERERS_LSP_DIR .. "/lua/sumneko-lua-language-server"
+--local binary_path = PERERS_LSP_DIR .. "/bin/lua-language-server"
+local binary_path = "lua-language-server"
 
 require'lspconfig'.sumneko_lua.setup {
   cmd = {binary_path},

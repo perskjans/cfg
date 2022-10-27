@@ -87,6 +87,7 @@ suse)
     neovim
     openssh
     openssl
+    opi
     sysstat
     tmux
     unzip
@@ -95,7 +96,7 @@ suse)
 
   dev_packages=(
     automake
-    #clang
+    clang
     diffutils
     fossil
     gcc

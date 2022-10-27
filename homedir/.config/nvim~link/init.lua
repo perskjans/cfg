@@ -8,8 +8,7 @@ PERERS_CONFIG_DIR =  vim.fn.stdpath('config')
 PERERS_DATA_DIR  =  vim.fn.stdpath('data')
 PERERS_PLUGIN_DIRECTORY = string.format('%s/site/pack/packer/start/', PERERS_DATA_DIR)
 PERERS_LOCAL_BIN = vim.env.XDG_DATA_HOME .. '/../bin'
-PERERS_LSP_DIR  =  vim.fn.stdpath('data') .. '/lspinstall'
-
+require('perers.utils')
 -- Map leader keys before loading plugins and setting key mappings
 vim.g.mapleader = ' '
 vim.g.maplocalleader = '\\'
@@ -65,7 +64,7 @@ vim.opt.incsearch = true             -- show match for partly typed search comma
 
 -- 4 displaying text {{{
 vim.opt.scrolloff = 8          -- number of screen lines to show around the cursor
-vim.opt.wrap = false           -- long lines wrap (local to window)
+vim.opt.wrap = true            -- long lines wrap (local to window)
 vim.opt.linebreak = true       -- wrap long lines at a character in 'breakat' (local to window)
 vim.opt.showbreak = ' ¬ '      -- string to put before wrapped screen lines
 vim.opt.sidescrolloff = 5      -- minimal number of columns to keep left and right of the cursor
@@ -92,7 +91,6 @@ vim.opt.conceallevel = 0       -- controls whether concealable text is hidden (l
 -- 5 syntax, highlighting and spelling {{{
 vim.opt.synmaxcol = 1000       -- maximum column to look for syntax items (local to buffer)
 vim.opt.hlsearch = true        -- highlight all matches for the last used search pattern
-vim.wo.t_Co = "256"            -- Support 256 colors
 vim.opt.termguicolors = true   -- use GUI colors for the terminal
 vim.opt.cursorline = true      -- highlight the screen line of the cursor (local to window)
 vim.opt.colorcolumn = '81'     -- colorcolumn  columns to highlight (local to window)
@@ -656,27 +654,7 @@ end
 
 --==============================================================================
 -- LANGUAGE SERVERS {{{
-require("mason").setup()
-
-local function setup_servers()
-  local function requiref(module)
-      require(module)
-  end
-
-  local options = require('perers.language_servers.common_config')
-  local nvim_lsp = require('lspconfig')
-  local servers = vim.fn.systemlist('ls ' .. PERERS_LSP_DIR)
-
-  for _, server in pairs(servers) do
-      module = 'perers.language_servers.' .. server
-      local res = pcall(requiref,module)
-      if not(res) then
-          nvim_lsp[server].setup { on_attach = options.common_on_attach }
-      end
-  end
-end
-
-setup_servers()
+require('perers.language_servers').configure_lsp("efm")
 
 --}}}
 --==============================================================================
