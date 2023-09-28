@@ -13,6 +13,8 @@ require('perers.utils')
 vim.g.mapleader = ' '
 vim.g.maplocalleader = '\\'
 vim.opt.termguicolors = true
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 vim.cmd('colorscheme perers')
 --}}}
 --==============================================================================
@@ -531,45 +533,61 @@ local available_plugins = vim.fn.systemlist('ls ' .. PERERS_PLUGIN_DIRECTORY)
 for _, plugin in pairs(available_plugins) do
     -- nvim-tree {{{
     if plugin == "nvim-tree.lua" then
-        local tree_cb = require'nvim-tree.config'.nvim_tree_callback
-        require'nvim-tree'.setup {
-            disable_netrw = false,
-            view = {
-                mappings = {
-                    list = {{ key = "C", cb = tree_cb("cd") },}
+        require("nvim-tree").setup({
+            renderer = {
+                icons = {
+                    web_devicons = {
+                        file = {
+                            enable = false,
+                            color = true,
+                        },
+                        folder = {
+                            enable = false,
+                            color = true,
+                        },
+                    },
+                    symlink_arrow = " ➛ ",
+                    show = {
+                        file = false,
+                        folder = false,
+                        folder_arrow = false,
+                        git = true,
+                        modified = true,
+                        diagnostics = true,
+                        bookmarks = false,
+                    },
+                    glyphs = {
+                        default = "",
+                        symlink = "",
+                        bookmark = "󰆤",
+                        modified = "●",
+                        folder = {
+                            arrow_closed = "",
+                            arrow_open = "",
+                            default = "",
+                            open = "",
+                            empty = "",
+                            empty_open = "",
+                            symlink = "",
+                            symlink_open = "",
+                        },
+                        git = {
+                            unstaged = "✗",
+                            staged = "✓",
+                            unmerged = "",
+                            renamed = "➜",
+                            untracked = "★",
+                            deleted = "",
+                            ignored = "◌",
+                        },
+                    },
                 },
             },
-        }
+            -- filters = {
+            --     dotfiles = true,
+            -- },
+        })
 
-        vim.g.nvim_tree_icons = {
-     default = "",
-     symlink = "",
-     git = {
-       unstaged = "✗",
-       staged = "✓",
-       unmerged = "!",
-       renamed = "➜",
-       untracked = "★",
-       deleted = "",
-       ignored = "◌"
-       },
-     folder = {
-       arrow_open = "▾",
-       arrow_closed = "▸",
-       default = "#",
-       open = "*",
-       empty = "$",
-       empty_open = "¿",
-       symlink = "",
-       symlink_open = "",
-       },
-       lsp = {
-         hint = "",
-         info = "",
-         warning = "",
-         error = "",
-       }
-     }
     end -- }}}
 
     -- nvim-colorizer {{{
