@@ -1,7 +1,5 @@
-configdir/nvim/pack/plugins/
-configdir/nvim/plugin/packer_compiled.lua
-configdir/fontconfig/fonts.dir
-configdir/fontconfig/fonts.scale
 homedir/.dc++/
-homedir/.vim/pack/plugins/
-homedir/bin/thirdpartyapps/
+homedir/.vim~link/pack/plugins/
+homedir/bin~link/thirdpartyapps/
+homedir/.config/fontconfig~link/fonts.dir
+homedir/.config/fontconfig~link/fonts.scale
