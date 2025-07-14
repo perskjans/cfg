@@ -11,7 +11,7 @@ getbranch()
 # Show the git commit status.
 commit_status()
 {
-    local status=$(git status -u | egrep -io "deleted|conflict|copied|modified|new|renamed|unstage|untracked" | tr [:upper:] [:lower:] | sort | uniq | tr "\n" " ")
+    local status=$(git status -u | grep -E -io "deleted|conflict|copied|modified|new|renamed|unstage|untracked" | tr [:upper:] [:lower:] | sort | uniq | tr "\n" " ")
     for line in $status
     do
         case $line in
@@ -155,7 +155,7 @@ pullall()
 
   repostatus
 
-  dirs=$(cat $reposfile | egrep "$FILTER")
+  dirs=$(cat $reposfile | grep -E "$FILTER")
 
   for dir in $dirs;
   do
