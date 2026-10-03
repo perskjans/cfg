@@ -419,4 +419,3 @@ for f in $HOME/.config/shellfiles/bash/*; do . $f; done
 [ -d $HOME/.work/config ] && for f in $HOME/.work/config/*; do . $f; done
 
 
-. "$HOME/.local/share/../bin/env"
