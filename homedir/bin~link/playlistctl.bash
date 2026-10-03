@@ -1,5 +1,7 @@
 #!/bin/bash
 
+USE_PAMIXER=0
+
 
 function toogle_play()
 {
@@ -9,17 +11,15 @@ function toogle_play()
 
 function volume_off()
 {
-    for _ in {1..20}; do
-        xdotool key XF86AudioLowerVolume
-        sleep 0.25
+    for _ in {1..40}; do
+        pamixer -d 2
+        sleep 0.1
     done
 }
 
 function volume_on()
 {
-    for _ in {1..20}; do
-        xdotool key XF86AudioRaiseVolume
-    done
+    pamixer --set-volume 100
 }
 
 
@@ -31,7 +31,7 @@ function play()
     divider=3
 
     step=$(( total_seconds / divider ))
-    if [[ $step -lt 90 ]]; then
+    if [[ $step -lt 80 ]]; then
         divider=2
         step=$(( total_seconds / divider ))
 
@@ -59,10 +59,11 @@ function play()
         printf "$((i + 1))/$num_steps    "
         read -p "Press <Enter>" _
         sleep_time=${steps[$i]}
+        pamixer --unmute
 
 
         if [[ $i -lt $num_steps ]]; then
-            sleep_time=$((sleep_time - 5))
+            sleep_time=$((sleep_time - 4))
         fi
 
         toogle_play
@@ -79,6 +80,10 @@ function play()
     done
 }
 
+pamixer --mute
+read -p "Press <Enter> to start" _
+pamixer --unmute
+echo
 
 song_nr=1
 
