@@ -1,0 +1,12 @@
+{
+  "plugins": {
+    "nvim-colorizer.lua": {
+      "rev": "a065833f35a3a7cc3ef137ac88b5381da2ba302e",
+      "src": "https://github.com/norcalli/nvim-colorizer.lua"
+    },
+    "nvim-tree.lua": {
+      "rev": "87594aa7c8808701b418b285e9adf690acead201",
+      "src": "https://github.com/kyazdani42/nvim-tree.lua"
+    }
+  }
+}
