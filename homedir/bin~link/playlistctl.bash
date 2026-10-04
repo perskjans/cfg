@@ -1,13 +1,19 @@
 #!/bin/bash
 
-USE_PAMIXER=0
 
-
-function toogle_play()
+function dbus_send()
 {
-    xdotool key XF86AudioPlay
-}
+    local args='--print-reply --session --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 '
 
+    case "$1" in
+        play) dbus-send $args org.mpris.MediaPlayer2.Player.Play >/dev/null ;;
+        pause) dbus-send $args org.mpris.MediaPlayer2.Player.Pause >/dev/null ;;
+        setpos) dbus-send $args org.mpris.MediaPlayer2.Player.SetPosition objpath:$TRACKID int64:0 >/dev/null ;;
+        metadata)
+            dbus-send $args org.freedesktop.DBus.Properties.Get string:org.mpris.MediaPlayer2.Player string:Metadata | grep -E 'string|uint64' | sed -E 's/^.*(string|uint64) //g' | tr -d '"' | grep -A1 -E ':trackid|:length|:artist|:title' | grep -vE ':|^--$'
+            ;;
+    esac
+}
 
 function volume_off()
 {
@@ -25,17 +31,17 @@ function volume_on()
 
 function play()
 {
-    total_seconds="$1"
+    local total_seconds="$1"
     printf -v time_str '%(%M:%S)T' $total_seconds
-    time_str="${time_str##0}"
-    divider=3
+    local time_str="${time_str##0}"
+    local divider=4
 
-    step=$(( total_seconds / divider ))
-    if [[ $step -lt 80 ]]; then
-        divider=2
+    local step=$(( total_seconds / divider ))
+
+    while [[ $step -lt 80 ]] && [[ $divider -ne 2 ]]; do
+        divider=$(( divider - 1 ))
         step=$(( total_seconds / divider ))
-
-    fi
+    done
 
     steps=()
 
@@ -66,44 +72,45 @@ function play()
             sleep_time=$((sleep_time - 4))
         fi
 
-        toogle_play
+        dbus_send "play"
         sleep $sleep_time
 
         if [[ $i -lt $num_steps ]]; then
             volume_off
-            toogle_play
-            sleep 0.5
+            #toogle_play
+            dbus_send "pause"
+            sleep 0.2
             volume_on
         else
-            toogle_play
+            dbus_send "play"
         fi
     done
 }
 
 pamixer --mute
 read -p "Press <Enter> to start" _
+dbus_send 'pause'
 pamixer --unmute
 echo
 
 song_nr=1
 
 while true; do
-    metadata=$(dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:org.mpris.MediaPlayer2.Player string:Metadata | grep -A2 -E ':length|:artist|:title' | grep -vE 'array|)|:' | tr -d '"')
-    song_data=$(echo $metadata | sed 's/^.*uint64 //; s/-- string/<>/; s/-- variant.*string/<>/')
+    mapfile -t metadata < <(dbus_send 'metadata')
 
-    length="${song_data%% <>*}"
-    length=$(( length / 1000000 ))
-    title="${song_data##*<> }"
-    artist="${song_data#*<> }"
-    artist="${artist%% <>*}"
+    TRACKID="${metadata[0]}"
+    TRACK_LENGTH=$(( metadata[1] / 1000000 ))
+    ARTIST="${metadata[2]}"
+    TITLE="${metadata[3]}"
 
-    if [[ "$title" == "5 Seconds of Silence" ]]; then
+    if [[ "$TITLE" == "5 Seconds of Silence" ]]; then
         echo -e "\nSpellista slut"
         exit
     fi
 
-    echo -e "\n\nSång $song_nr: $artist - $title"
-    play "$length"
+    dbus_send 'setpos'
+    echo -e "\n\nSång $song_nr: $ARTIST - $TITLE"
+    play "$TRACK_LENGTH"
     song_nr=$((song_nr + 1))
 done
 
