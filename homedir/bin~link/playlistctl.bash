@@ -10,6 +10,7 @@ function dbus_send()
     local get_prop='org.freedesktop.DBus.Properties.Get string:org.mpris.MediaPlayer2.Player'
 
     case "$1" in
+        next) dbus-send $args org.mpris.MediaPlayer2.Player.Next >/dev/null ;;
         play) dbus-send $args org.mpris.MediaPlayer2.Player.Play >/dev/null ;;
         stop) dbus-send $args org.mpris.MediaPlayer2.Player.Stop >/dev/null ;;
         getpos) dbus-send $args $get_prop string:"Position" | sed 's/^.*\ //' ;;
@@ -92,7 +93,14 @@ function play()
         sleep_time=${steps[$i]}
         i=$((i + 1))
         printf "$i/$num_steps    "
-        read -p "Press <Enter>" _
+        read -p "Press <Enter>" input
+
+        if [[ "$input" != "" ]]; then
+            dbus_send 'next'
+            sleep 1
+            return
+        fi
+
         pamixer --unmute
 
         if [[ $i -eq 1 ]] || [[ $i -eq $num_steps ]]; then
